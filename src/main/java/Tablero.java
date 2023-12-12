@@ -1,7 +1,4 @@
-public class Tablero {
-    char[][] tablero;
-
-    public class Tablero {
+ public class Tablero {
         private int[][] tablero;
 
         public Tablero() {
@@ -27,5 +24,4 @@ public class Tablero {
         }
 
         // Resto de los métodos de la clase Tablero
-    }
 }

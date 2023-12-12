@@ -15,7 +15,7 @@ public abstract class Pieza {
 
     public abstract boolean validoMovimiento(Movimiento mov);
 
-    public abstract void pintarPieza();
+    public abstract void pintarPieza(); //no entiendo por que esto tiene que estar en cada clase si siempre es un sout toString
 
     @Override
     public String toString() {

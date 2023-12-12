@@ -18,6 +18,6 @@ public class Torre extends Pieza{
 
     @Override
     public String toString() {
-        return color ==  "" ? "♖":"♜";
+        return "0".equals(getColor()) ? "♖":"♜";
     }
 }

@@ -1,3 +1,5 @@
+package piezas;
+
 public class Movimiento {
     Posicion posInicial;
     Posicion posFinal;
