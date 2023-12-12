@@ -2,7 +2,7 @@ package piezas;
 
 public class Caballo extends Pieza{
 
-    public Caballo(String color, String nombre) {
+    public Caballo(boolean color, String nombre) {
         super(color, nombre);
     }
 
@@ -11,13 +11,9 @@ public class Caballo extends Pieza{
         return false;
     }
 
-    @Override
-    public void pintarPieza() {
-
-    }
 
     @Override
     public String toString() {
-        return "0".equals(getColor()) ? "♘":"♞";
+        return getColor() ? "♘":"♞";
     }
 }

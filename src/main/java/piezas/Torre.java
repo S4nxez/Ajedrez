@@ -2,7 +2,7 @@ package piezas;
 
 public class Torre extends Pieza{
 
-    public Torre(String color, String nombre) {
+    public Torre(boolean color, String nombre) {
         super(color, nombre);
     }
 
@@ -12,12 +12,7 @@ public class Torre extends Pieza{
     }
 
     @Override
-    public void pintarPieza() {
-
-    }
-
-    @Override
     public String toString() {
-        return "0".equals(getColor()) ? "♖":"♜";
+        return getColor() ? "♖":"♜";
     }
 }

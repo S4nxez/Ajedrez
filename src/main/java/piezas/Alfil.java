@@ -1,7 +1,7 @@
 package piezas;
 
 public class Alfil extends Pieza{
-    public Alfil(String color, String nombre) {
+    public Alfil(boolean color, String nombre) {
         super(color, nombre);
     }
 
@@ -10,14 +10,10 @@ public class Alfil extends Pieza{
         return false;
     }
 
-    @Override
-    public void pintarPieza() {
-        System.out.println(toString());
-    }
 
     @Override
     public String toString() {
-        return "0".equals(getColor()) ? "♗":"♝";
+        return getColor() ? "♗":"♝";
     }
 
 }

@@ -2,7 +2,7 @@ package piezas;
 
 public class Peon extends Pieza{
 
-    public Peon(String color, String nombre) {
+    public Peon(boolean color, String nombre) {
         super(color, nombre);
     }
 
@@ -12,14 +12,8 @@ public class Peon extends Pieza{
     }
 
     @Override
-    public void pintarPieza() {
-        System.out.println(toString());
-    }
-
-
-    @Override
     public String toString() {
-        return "0".equals(getColor()) ? "♙":"♟";
+        return getColor() ? "♙":"♟";
     }
 
 }

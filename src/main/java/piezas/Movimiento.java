@@ -1,8 +1,8 @@
 package piezas;
 
 public class Movimiento {
-    Posicion posInicial;
-    Posicion posFinal;
+    private Posicion posInicial;
+    private Posicion posFinal;
 
     public Movimiento(Posicion posInicial, Posicion posFinal) {
         this.posInicial = posInicial;

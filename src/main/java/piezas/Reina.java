@@ -1,7 +1,7 @@
 package piezas;
 
 public class Reina extends Pieza{
-    public Reina(String color, String nombre) {
+    public Reina(boolean color, String nombre) {
         super(color, nombre);
     }
 
@@ -11,13 +11,8 @@ public class Reina extends Pieza{
     }
 
     @Override
-    public void pintarPieza() {
-        System.out.println(toString());
-    }
-
-    @Override
     public String toString() {
-        return "0".equals(getColor()) ? "♕":"♛";
+        return getColor() ? "♕":"♛";
     }
 
 }
