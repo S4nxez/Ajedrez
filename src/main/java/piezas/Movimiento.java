@@ -8,11 +8,20 @@ public class Movimiento {
         this.posInicial = posInicial;
         this.posFinal = posFinal;
     }
-    boolean esVertical(){
-        return ;
+
+    public Posicion getPosFinal() {
+        return posFinal;
     }
-    boolean esHorizontal(){
-        return ;
+
+    public Posicion getPosInicial() {
+        return posInicial;
+    }
+
+    public boolean esVertical(){
+        return posFinal.getColumna() == posInicial.getColumna();
+    }
+    public boolean esHorizontal(){
+        return posInicial.getFila() == posFinal.getFila();
     }
     boolean esDiagonal(){
         return ;
