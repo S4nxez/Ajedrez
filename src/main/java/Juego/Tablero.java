@@ -1,3 +1,5 @@
+package Juego;
+
 import piezas.*;
 public class Tablero {
         private Pieza[][] tablero;
@@ -43,28 +45,31 @@ public class Tablero {
             return tablero[pos.getFila()][pos.getColumna()] != null;
         }
         public boolean hayPiezasEntre(Movimiento mov){
-            boolean flag = false;
             int sum = 1;
 
-            // todo esto me va a dar un problema porque estoy recorriendo el tablero teniendo en cuenta que i es menor que que la posicion final y puede empezar siendo mayor
-            //para solucionar el problema que digo arriba
-            if (mov.getPosInicial() > mov.getPosFinal()) //revisa bien esta condicion que la he puesto a boleo
-                sum = -1;
-
             if (mov.esHorizontal()){
-                for (int i = mov.getPosInicial().getFila(); i < mov.getPosFinal().getFila(); i + sum) {
-                    if (tablero[mov.getPosInicial().getColumna][i] != null)
-                        return flag;
+                if (mov.getPosInicial().getFila() > mov.getPosFinal().getFila())
+                    sum = -1;
+                for (int i = mov.getPosInicial().getFila(); i != mov.getPosFinal().getFila(); i += sum) {
+                    if (tablero[mov.getPosInicial().getColumna()][i] != null)
+                        return false;
                 }
             } else if (mov.esVertical()) {
-                for (int i = mov.getPosInicial().getColumna(); i < mov.getPosFinal().getColumna(); i + sum) {
-                    if (tablero[i][mov.getPosInicial().getFila] != null)
-                        return flag;
+                for (int i = mov.getPosInicial().getColumna(); i < mov.getPosFinal().getColumna(); i += sum) {
+                    if (tablero[i][mov.getPosInicial().getFila()] != null)
+                        return false;
                 }
-            }else{ //en este caso sería un movimiento diagonal
-
+            }else{ //en este caso sería un movimiento diagonal porque para el caballo no uso el método
+                if (mov.getPosInicial().getFila() > mov.getPosFinal().getFila())
+                    sum = -1;
+                for (int i = mov.getPosInicial().getFila(); i < mov.getPosFinal().getFila(); i += sum) {
+                    for (int j = mov.getPosInicial().getColumna(); j < mov.getPosFinal().getColumna(); j += sum) {
+                        if (tablero[i][j] != null)
+                            return false;
+                    }
+                }
             }
-            return flag;
+            return true;
         }
         public void ponPieza(Pieza figura, int fila, int columna){ // no entiendo por qué hay que hacer el mismo metodo metiendo fila y columna por separado y con posicion luego, no podría usar siempre uno?
             tablero[fila][columna] = figura;

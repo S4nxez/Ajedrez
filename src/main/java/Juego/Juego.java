@@ -1,13 +1,13 @@
-import piezas.Movimiento;
+package Juego;
 
 public class Juego {
-    private int elTurno; // 0->Negras 1->Blancas //Boolean o String o char
+    private boolean elTurno; // 0->Negras 1->Blancas
 
-    public int getTurno() {
+    public boolean getTurno() {
         return elTurno;
     }
 
-    public void setTurno(int nuevoTurno) {
+    public void setTurno(boolean nuevoTurno) {
         this.elTurno = nuevoTurno;
     }
 
@@ -20,7 +20,7 @@ public class Juego {
         // ...
 
         // Actualiza el turno
-        elTurno = 1 - elTurno; // Alternar entre 0 y 1
+        elTurno = !elTurno; // Alternar entre 0 y 1
 
         return movimiento;
     }

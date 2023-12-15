@@ -1,5 +1,7 @@
 package piezas;
 
+import Juego.Movimiento;
+
 public class Caballo extends Pieza{
 
     public Caballo(boolean color, String nombre) {

@@ -1,5 +1,7 @@
 package piezas;
 
+import Juego.Movimiento;
+
 public class Torre extends Pieza{
 
     public Torre(boolean color, String nombre) {

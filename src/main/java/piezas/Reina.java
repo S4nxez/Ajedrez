@@ -1,5 +1,7 @@
 package piezas;
 
+import Juego.Movimiento;
+
 public class Reina extends Pieza{
     public Reina(boolean color, String nombre) {
         super(color, nombre);

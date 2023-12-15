@@ -1,5 +1,7 @@
 package piezas;
 
+import Juego.Movimiento;
+
 public abstract class Pieza {
     private boolean color;
     private String nombre;
