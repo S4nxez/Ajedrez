@@ -25,10 +25,10 @@ public class Movimiento {
     }
     boolean esDiagonal(){
         int sum = 1;
-        if (getPosFinal().getFila() < getPosInicial().getFila)
+        if (getPosFinal().getFila() < getPosInicial().getFila())
             sum = -1;
         for (int i = 0; i <= getPosFinal().getColumna(); i += sum) {
-            for (int j = 0; j <= getPosFinal().getFila; j += sum) { // Esto me va a dar un bucle infinito en caso de que no sea un movimiento diagonal
+            for (int j = 0; j <= getPosFinal().getFila(); j += sum) { // Esto me va a dar un bucle infinito en caso de que no sea un movimiento diagonal
                 if (getPosInicial().getFila() == j)
                     return true;
             }

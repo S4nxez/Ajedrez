@@ -14,25 +14,26 @@ public class Tablero {
             tablero[0][0] = tablero[0][7] = new Torre(false,"♜");
             tablero[7][7] = tablero[7][0] = new Torre(true, "♖");
             //Coloco los caballos
-            tablero[1][0] = tablero[6][0] = new Caballo(false,"♞");
-            tablero[1][7] = tablero[6][7] = new Caballo(false, "♘");
+            tablero[0][1] = tablero[0][6] = new Caballo(false,"♞");
+            tablero[7][1] = tablero[7][6] = new Caballo(true, "♘");
             //Coloco los alfiles
-            tablero[2][0] = tablero[5][0] = new Alfil(false, "♝");
-            tablero[2][7] = tablero[5][7] = new Alfil(true, "♗");
+            tablero[0][2] = tablero[0][5] = new Alfil(false, "♝");
+            tablero[7][2] = tablero[7][5] = new Alfil(true, "♗");
             //Coloco el rey y la reina en cada lado
-            tablero[3][0] = new Rey(false, "♚");
-            tablero[3][7] = new Rey(true,"♔");
-            tablero[4][0] = new Reina(false, "♛");
-            tablero[4][7] = new Reina(true, "♕");
+            tablero[0][4] = new Rey(false, "♚");
+            tablero[7][4] = new Rey(true,"♔");
+            tablero[0][3] = new Reina(false, "♛");
+            tablero[7][3] = new Reina(true, "♕");
         }
 
         public void pintarTablero() {
             for (int fila = 0; fila < 8; fila++) {
+                System.out.print(fila + 1 + " | ");
                 for (int columna = 0; columna < 8; columna++) {
                     if (tablero[fila][columna] != null)
                         System.out.print( tablero[fila][columna] + " ");
                     else
-                        System.out.println("#");
+                        System.out.print("");
                 }
                 System.out.println();
             }

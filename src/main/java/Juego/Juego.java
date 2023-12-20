@@ -14,14 +14,15 @@ public class Juego {
     public Movimiento jugada(String jugada, Tablero tablero) {
         // Implementa la lógica para procesar la jugada y actualizar el tablero
         // Devuelve un objeto de tipo piezas. Movimiento con la información de la jugada
-        Movimiento movimiento = new Movimiento(/* Parámetros de la jugada */);
+        Posicion posIni = new Posicion(1, 2);
+        Posicion posFin = new Posicion(2 , 2);
+        Movimiento movimiento = new Movimiento(posIni, posFin);
 
         // Lógica para actualizar el tablero y realizar otras acciones necesarias
         // ...
 
-        // Actualiza el turno
-        elTurno = !elTurno; // Alternar entre 0 y 1
-
+        elTurno = !elTurno;
+        tablero.pintarTablero();
         return movimiento;
     }
 }
