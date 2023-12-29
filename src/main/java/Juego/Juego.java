@@ -1,29 +1,28 @@
 package Juego;
 
-public class Juego {
-    private boolean elTurno; // 0->Negras 1->Blancas
+import piezas.Pieza;
 
+public class Juego {
+    private boolean elTurno = true; // 0->Negras 1->Blancas
     public boolean getTurno() {
         return elTurno;
     }
-
     public void setTurno(boolean nuevoTurno) {
         this.elTurno = nuevoTurno;
-    }
-
+    } // no se yo si voy a necesitar este metodo
     public Movimiento jugada(String jugada, Tablero tablero) {
         // Implementa la lógica para procesar la jugada y actualizar el tablero
         // Devuelve un objeto de tipo piezas. Movimiento con la información de la jugada
-        Posicion posIni = new Posicion(1, 2);
-        Posicion posFin = new Posicion(2 , 2);
+        Posicion posIni = new Posicion((jugada.charAt(1) - 49), (jugada.charAt(0) - 97));
+        Posicion posFin = new Posicion((jugada.charAt(3) - 49), (jugada.charAt(2) - 97));
+        Pieza figura = tablero.getPieza(posIni);
         Movimiento movimiento = new Movimiento(posIni, posFin);
-
-        // Lógica para actualizar el tablero y realizar otras acciones necesarias
-        // ...
-
-        elTurno = !elTurno;
-        tablero.pintarTablero();
-        return movimiento;
+        if (figura.validoMovimiento(movimiento) && figura.getColor() == elTurno){
+            tablero.quitaPieza(posIni);
+            tablero.ponPieza(figura, posFin);
+            elTurno = !elTurno;
+        }else
+            movimiento = null;
+        return movimiento; //if movimiento == null reviso fuera y lanzo alguna excepcion
     }
 }
-

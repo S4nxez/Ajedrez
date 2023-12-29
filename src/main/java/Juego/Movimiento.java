@@ -23,7 +23,7 @@ public class Movimiento {
     public boolean esHorizontal(){
         return getPosInicial().getFila() == getPosFinal().getFila();
     }
-    boolean esDiagonal(){
+    public boolean esDiagonal(){
         int sum = 1;
         if (getPosFinal().getFila() < getPosInicial().getFila())
             sum = -1;
@@ -35,10 +35,22 @@ public class Movimiento {
         }
         return false;
     }
-    int saltoHorizontal(){ //devuelve la cantidad de salto horizontal
-        return 3;
-    } //hay que hacer este y el de abajo aun
-    int saltoVertical(){ //devuelve la cantidad de salto vertical
-        return 1;
+    public int saltoHorizontal(){ //devuelve la cantidad de salto horizontal
+        int ret = 0;
+
+        for (int i = getPosInicial().getColumna(); i < getPosFinal().getColumna(); i++) {
+            ret++;
+        }
+        System.out.println("SALTO HORIZONTAL: " + ret);
+        return ret;
+    }
+    public int saltoVertical(){ //devuelve la cantidad de salto vertical
+        int ret = 0;
+
+        for (int i = getPosInicial().getFila(); i < getPosFinal().getFila(); i++) {
+            ret++;
+        }
+        System.out.println("SALTO VERTICAL: " + ret);
+        return ret;
     }
 }

@@ -17,9 +17,6 @@ public abstract class Pieza {
 
     public abstract boolean validoMovimiento(Movimiento mov);
 
-    public void pintarPieza(){
-        System.out.println(toString());
-    }
     @Override
     public String toString() {
         return nombre;

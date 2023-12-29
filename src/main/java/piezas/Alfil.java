@@ -9,13 +9,11 @@ public class Alfil extends Pieza{
 
     @Override
     public boolean validoMovimiento(Movimiento mov) {
-        return false;
+        return mov.esDiagonal();
     }
-
 
     @Override
     public String toString() {
         return getColor() ? "♗":"♝";
     }
-
 }

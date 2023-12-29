@@ -9,7 +9,7 @@ public class Reina extends Pieza{
 
     @Override
     public boolean validoMovimiento(Movimiento mov) {
-        return false;
+        return (mov.esDiagonal() || mov.esVertical() || mov.esHorizontal());
     }
 
     @Override
