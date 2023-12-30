@@ -13,11 +13,11 @@ public class Juego {
     public Movimiento jugada(String jugada, Tablero tablero) {
         // Implementa la lógica para procesar la jugada y actualizar el tablero
         // Devuelve un objeto de tipo piezas. Movimiento con la información de la jugada
-        Posicion posIni = new Posicion((jugada.charAt(1) - 49), (jugada.charAt(0) - 97));
-        Posicion posFin = new Posicion((jugada.charAt(3) - 49), (jugada.charAt(2) - 97));
+        Posicion posIni = new Posicion((jugada.charAt(1) - 49), (jugada.charAt(0) - 98));
+        Posicion posFin = new Posicion((jugada.charAt(3) - 49), (jugada.charAt(2) - 98));
         Pieza figura = tablero.getPieza(posIni);
         Movimiento movimiento = new Movimiento(posIni, posFin);
-        if (figura.validoMovimiento(movimiento) && figura.getColor() == elTurno){
+        if (figura.validoMovimiento(movimiento) && figura.getColor() == elTurno){ //cuidao que aqui parece que cuando pillas un null en la posinicial peta en ejecucion
             tablero.quitaPieza(posIni);
             tablero.ponPieza(figura, posFin);
             elTurno = !elTurno;

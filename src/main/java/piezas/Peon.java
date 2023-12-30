@@ -14,7 +14,7 @@ public class Peon extends Pieza{
             return false;
         if (mov.getPosInicial().getFila() == 1 && getColor()) //esto quiere decir que si es blancas y no ha movido aun
             return (mov.saltoVertical() == 1 || mov.saltoVertical() == 2);
-        if (mov.getPosInicial().getFila() == 7 && !getColor())
+        if (mov.getPosInicial().getFila() == 6 && !getColor())
             return (mov.saltoVertical() == -1 || mov.saltoVertical() == -2);
         if (getColor())
             return mov.saltoVertical() == 1;

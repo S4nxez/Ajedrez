@@ -12,9 +12,7 @@ public class Caballo extends Pieza{
     public boolean validoMovimiento(Movimiento mov) {
         if ((mov.saltoHorizontal() == 2 || mov.saltoHorizontal() == -2) && (mov.saltoVertical() == 1 || mov.saltoVertical() == -1))
             return true;
-        if ((mov.saltoVertical() == 2 || mov.saltoVertical() == -2) && (mov.saltoHorizontal() == -1 || mov.saltoHorizontal() == 1))
-            return true;
-        return false;
+        return (mov.saltoVertical() == 2 || mov.saltoVertical() == -2) && (mov.saltoHorizontal() == -1 || mov.saltoHorizontal() == 1);
     }
 
     @Override
