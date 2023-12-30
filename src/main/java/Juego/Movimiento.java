@@ -51,7 +51,7 @@ public class Movimiento {
         if (getPosFinal().getFila() > getPosInicial().getFila())
             incremento = 1;
 
-        for (int i = getPosInicial().getFila(); i < getPosFinal().getFila(); i += incremento) {
+        for (int i = getPosInicial().getFila(); i != getPosFinal().getFila(); i += incremento) {
             ret += incremento;
         }
         System.out.println("SALTO VERTICAL: " + ret);
