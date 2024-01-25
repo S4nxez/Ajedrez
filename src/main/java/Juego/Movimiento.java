@@ -1,4 +1,4 @@
-package Juego;
+ package Juego;
 
 public class Movimiento {
     private Posicion posInicial;
