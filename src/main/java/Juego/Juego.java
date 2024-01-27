@@ -10,7 +10,7 @@ public class Juego {
     public void setTurno(boolean nuevoTurno) {
         this.elTurno = nuevoTurno;
     } // no se yo si voy a necesitar este metodo
-    public Movimiento jugada(String jugada, Tablero tablero) {
+    public Movimiento jugada(String jugada, Tablero tablero) { //control de entrada solo
         // Implementa la lógica para procesar la jugada y actualizar el tablero
         // Devuelve un objeto de tipo piezas. Movimiento con la información de la jugada
         Posicion posIni = new Posicion((jugada.charAt(1) - 49), (jugada.charAt(0) - 98));
