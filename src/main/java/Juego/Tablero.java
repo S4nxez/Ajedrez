@@ -27,14 +27,19 @@ public class Tablero {
         }
 
         public void pintarTablero() { // tener en cuenta que esto invierte el tablero al imprimirlo para mejor UI pero el tablero esa almacenado con las blancas arriba por el tema del input que parte de arriba
+            boolean esBlanco = true;
             for (int fila = 7; fila >= 0; fila--) {
                 System.out.print(fila + 1 + " |");
                 for (int columna = 7; columna >= 0; columna--) {
                     if (tablero[fila][columna] != null)
                         System.out.print(tablero[fila][columna] + " ");
+                    else if (esBlanco)
+                        System.out.print(" □ ");
                     else
-                        System.out.print(" @ ");
+                        System.out.print(" ■ ");
+                    esBlanco = !esBlanco;
                 }
+                esBlanco = !esBlanco;
                 System.out.println();
             }
             System.out.println("- | A  B  C  D  E  F  G  H");
@@ -46,7 +51,7 @@ public class Tablero {
         public boolean hayPieza(Posicion pos){
             return tablero[pos.getFila()][pos.getColumna()] != null;
         }
-        public boolean hayPiezasEntre(Movimiento mov){
+        public boolean hayPiezasEntre(Movimiento mov){ //Este metodo lo tengo aqui y no en la clase movimiento proque sino tendria que crear un tablero en la clase movimiento creo
             int sum = 1;
 
             if (mov.esHorizontal()){
