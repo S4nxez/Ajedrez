@@ -13,8 +13,8 @@ public class Juego {
     public Movimiento jugada(String jugada, Tablero tablero) { //control de entrada solo
         // Implementa la lógica para procesar la jugada y actualizar el tablero
         // Devuelve un objeto de tipo piezas. Movimiento con la información de la jugada
-        Posicion posIni = new Posicion((jugada.charAt(1) - 49), (jugada.charAt(0) - 98));
-        Posicion posFin = new Posicion((jugada.charAt(3) - 49), (jugada.charAt(2) - 98));
+        Posicion posIni = new Posicion((7-(jugada.charAt(1) - 49)), (jugada.charAt(0) - 97));// Resto 49 no 48 ya que el usuario como minimo introduce un 1 equivalente al 0 del array
+        Posicion posFin = new Posicion((7-(jugada.charAt(3) - 49)), (jugada.charAt(2) - 97));
         Pieza figura = tablero.getPieza(posIni);
         Movimiento movimiento = new Movimiento(posIni, posFin);
         if (figura.validoMovimiento(movimiento) && figura.getColor() == elTurno){ //cuidao que aqui parece que cuando pillas un null en la posinicial peta en ejecucion
