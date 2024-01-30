@@ -37,8 +37,11 @@ public class Movimiento {
     }
     public int saltoHorizontal(){ //devuelve la cantidad de salto horizontal hay que arreglar este metodo del mismo modo que el de salto vertical
         int ret = 0;
+        int incremento = -1;
 
-        for (int i = getPosInicial().getColumna(); i < getPosFinal().getColumna(); i++) {
+        if (getPosFinal().getColumna() > getPosInicial().getColumna())
+            incremento = 1;
+        for (int i = getPosInicial().getColumna(); i != getPosFinal().getColumna(); i+= incremento) {
             ret++;
         }
         System.out.println("SALTO HORIZONTAL: " + ret);
