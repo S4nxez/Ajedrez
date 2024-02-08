@@ -20,13 +20,13 @@ public class Tablero {
             tablero[0][2] = tablero[0][5] = new Alfil(true, "♗");
             tablero[7][2] = tablero[7][5] = new Alfil(false, "♝");
             //Coloco el rey y la reina en cada lado
-            tablero[0][3] = new Rey(true,"♔");
-            tablero[7][3] = new Rey(false, "♚");
-            tablero[0][4] = new Reina(true, "♕");
-            tablero[7][4] = new Reina(false, "♛");
+            tablero[7][4] = new Rey(true,"♔");
+            tablero[0][4] = new Rey(false, "♚");
+            tablero[7][3] = new Reina(true, "♕");
+            tablero[0][3] = new Reina(false, "♛");
         }
 
-        public void pintarTablero() { // tener en cuenta que esto invierte el tablero al imprimirlo para mejor UI pero el tablero esa almacenado con las blancas arriba por el tema del input que parte de arriba
+        public void pintarTablero() {
             boolean esBlanco = true;
             for (int fila = 7; fila >= 0; fila--) {
                 System.out.print(fila + 1 + " |");
@@ -42,7 +42,7 @@ public class Tablero {
                 esBlanco = !esBlanco;
                 System.out.println();
             }
-            System.out.println("- | A  B  C  D  E  F  G  H");
+            System.out.println("- |A  B  C  D  E  F  G  H");
         }
 
         public boolean hayPieza(int fila, int columna){
@@ -51,29 +51,29 @@ public class Tablero {
         public boolean hayPieza(Posicion pos){
             return tablero[pos.getFila()][pos.getColumna()] != null;
         }
-        public boolean hayPiezasEntre(Movimiento mov){ //Este metodo lo tengo aqui y no en la clase movimiento proque sino tendria que crear un tablero en la clase movimiento creo
-            int sum = 1;
+        public boolean hayPiezasEntre(Movimiento mov){
+            int sum;
 
-            if (mov.esHorizontal()){
-                if (mov.getPosInicial().getFila() > mov.getPosFinal().getFila())
-                    sum = -1;
-                for (int i = mov.getPosInicial().getFila(); i != mov.getPosFinal().getFila(); i += sum) {
+            if (mov.esVertical()){
+                sum = (mov.getPosInicial().getFila() > mov.getPosFinal().getFila())? -1 : 1;
+                for (int i = mov.getPosInicial().getFila() + sum; i != mov.getPosFinal().getFila(); i += sum) {
                     if (hayPieza(mov.getPosInicial().getColumna(), i))
                         return true;
                 }
-            } else if (mov.esVertical()) {
-                for (int i = mov.getPosInicial().getColumna(); i < mov.getPosFinal().getColumna(); i += sum) {
+            } else if (mov.esHorizontal()) {
+                sum = (mov.getPosInicial().getColumna() > mov.getPosFinal().getColumna())? - 1 : 1;
+                for (int i = mov.getPosInicial().getColumna() + sum; i != mov.getPosFinal().getColumna(); i += sum) {
                     if (hayPieza(i, mov.getPosInicial().getFila()))
                         return true;
                 }
             }else{ //en este caso sería un movimiento diagonal porque para el caballo no uso el método
-                if (mov.getPosInicial().getFila() > mov.getPosFinal().getFila())
-                    sum = -1;
-                for (int i = mov.getPosInicial().getFila(); i < mov.getPosFinal().getFila(); i += sum) {
-                    for (int j = mov.getPosInicial().getColumna(); j < mov.getPosFinal().getColumna(); j += sum) {
-                        if (hayPieza(i, j))
-                            return true;
-                    }
+                int sumFil = (mov.getPosInicial().getFila() > mov.getPosFinal().getFila()) ? -1 : 1;
+                int sumCol  = (mov.getPosInicial().getColumna() > mov.getPosFinal().getColumna()) ? -1 : 1;
+                // Iteramos a lo largo de la diagonal
+                for (int i = mov.getPosInicial().getFila() + sumFil, j = mov.getPosInicial().getColumna() + sumCol;
+                     i != mov.getPosFinal().getFila() && j != mov.getPosFinal().getColumna(); i += sumFil, j += sumCol){
+                    if (hayPieza(i, j))
+                        return true;
                 }
             }
             return false;
