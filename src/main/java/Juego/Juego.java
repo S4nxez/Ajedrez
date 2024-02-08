@@ -11,6 +11,7 @@ public class Juego {
     }
     public void setTurno(boolean nuevoTurno) {
         this.elTurno = nuevoTurno;
+
     }
     public Movimiento jugada(String jugada, Tablero tablero) { //control de entrada solo creo que se puede hacer mas limpio creando una excepcion
         if (jugada == null || jugada.length() != 4)
@@ -31,6 +32,7 @@ public class Juego {
                 !tablero.hayPiezasEntre(movimiento)) || (figura.validoMovimiento(movimiento) && figura.getClass() == Caballo.class)) {
             tablero.quitaPieza(psIni);
             tablero.ponPieza(figura, psFin);
+
         }else
             movimiento = null;
         return movimiento;

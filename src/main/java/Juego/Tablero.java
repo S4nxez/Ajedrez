@@ -7,18 +7,18 @@ public class Tablero {
             this.tablero = new Pieza[8][8];
             //Coloco los peones:
             for (int i = 0; i < 8; i++) {
-                tablero[1][i] = new Peon(true, "♙");
-                tablero[6][i] = new Peon(false,"♟");
+                tablero[6][i] = new Peon(true, "♙");
+                tablero[1][i] = new Peon(false,"♟");
             }
             //Coloco las torres:
-            tablero[0][0] = tablero[0][7] = new Torre(true, "♖");
-            tablero[7][7] = tablero[7][0] = new Torre(false,"♜");
+            tablero[7][0] = tablero[7][7] = new Torre(true, "♖");
+            tablero[0][7] = tablero[0][0] = new Torre(false,"♜");
             //Coloco los caballos
-            tablero[0][1] = tablero[0][6] = new Caballo(true, "♘");
-            tablero[7][1] = tablero[7][6] = new Caballo(false,"♞");
+            tablero[7][1] = tablero[7][6] = new Caballo(true, "♘");
+            tablero[0][1] = tablero[0][6] = new Caballo(false,"♞");
             //Coloco los alfiles
-            tablero[0][2] = tablero[0][5] = new Alfil(true, "♗");
-            tablero[7][2] = tablero[7][5] = new Alfil(false, "♝");
+            tablero[7][2] = tablero[7][5] = new Alfil(true, "♗");
+            tablero[0][2] = tablero[0][5] = new Alfil(false, "♝");
             //Coloco el rey y la reina en cada lado
             tablero[7][4] = new Rey(true,"♔");
             tablero[0][4] = new Rey(false, "♚");
@@ -28,9 +28,10 @@ public class Tablero {
 
         public void pintarTablero() {
             boolean esBlanco = true;
-            for (int fila = 7; fila >= 0; fila--) {
-                System.out.print(fila + 1 + " |");
-                for (int columna = 7; columna >= 0; columna--) {
+            int     i = 8;
+            for (int fila = 0; fila <= 7; fila++) {
+                System.out.print(i + " |");
+                for (int columna = 0; columna <= 7; columna++) {
                     if (tablero[fila][columna] != null)
                         System.out.print(tablero[fila][columna] + " ");
                     else if (esBlanco)
@@ -41,6 +42,7 @@ public class Tablero {
                 }
                 esBlanco = !esBlanco;
                 System.out.println();
+                i--;
             }
             System.out.println("- |A  B  C  D  E  F  G  H");
         }

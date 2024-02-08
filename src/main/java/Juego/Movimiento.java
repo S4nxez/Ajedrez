@@ -33,10 +33,11 @@ public class Movimiento {
     }
     public int saltoHorizontal(){
         int ret = 0;
+        int incremento = -1;
 
         if (getPosFinal().getColumna() > getPosInicial().getColumna())
             incremento = 1;
-        for (int i = getPosInicial().getColumna(); i != getPosFinal().getColumna(); i+= incremento)
+        for (int i = getPosInicial().getColumna(); i != getPosFinal().getColumna(); i+= incremento
             ret++;
         System.out.println("SALTO HORIZONTAL: " + ret);
         return ret;
