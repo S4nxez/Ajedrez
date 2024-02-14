@@ -32,20 +32,16 @@ public class Movimiento {
     }
     public int saltoHorizontal(){
         int ret = 0;
-        int incremento = -1;
+        int incremento = (getPosFinal().getColumna() > getPosInicial().getColumna()) ? 1 : -1;
 
-        if (getPosFinal().getColumna() > getPosInicial().getColumna())
-            incremento = 1;
         for (int i = getPosInicial().getColumna(); i != getPosFinal().getColumna(); i+= incremento)
             ret += incremento;
         return ret;
     }
     public int saltoVertical(){
         int ret = 0;
-        int incremento = -1;
+        int incremento = (getPosFinal().getFila() > getPosInicial().getFila()) ? 1 : -1;
 
-        if (getPosFinal().getFila() > getPosInicial().getFila())
-            incremento = 1;
         for (int i = getPosInicial().getFila(); i != getPosFinal().getFila(); i += incremento)
             ret += incremento;
         return ret;

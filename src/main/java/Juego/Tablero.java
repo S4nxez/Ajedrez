@@ -52,14 +52,14 @@ public class Tablero {
         int sum;
 
         if (mov.esVertical()){
-            sum = (mov.getPosInicial().getFila() > mov.getPosFinal().getFila())? -1 : 1;
+            sum = (mov.getPosInicial().getFila() > mov.getPosFinal().getFila()) ? -1 : 1;
             for (int i = mov.getPosInicial().getFila() + sum; i != mov.getPosFinal().getFila(); i += sum) {
                 if (hayPieza(i, mov.getPosInicial().getColumna()))
                     return true;
             }
             return false;
         } else if (mov.esHorizontal()) {
-            sum = (mov.getPosInicial().getColumna() > mov.getPosFinal().getColumna())? - 1 : 1;
+            sum = (mov.getPosInicial().getColumna() > mov.getPosFinal().getColumna()) ? - 1 : 1;
             for (int i = mov.getPosInicial().getColumna() + sum; i != mov.getPosFinal().getColumna(); i += sum) {
                 if (hayPieza(mov.getPosInicial().getFila(), i))
                     return true;
@@ -70,13 +70,13 @@ public class Tablero {
             int sumCol  = (mov.getPosInicial().getColumna() > mov.getPosFinal().getColumna()) ? -1 : 1;
 
             for (int i = mov.getPosInicial().getFila() + sumFil, j = mov.getPosInicial().getColumna() + sumCol;
-                 i != mov.getPosFinal().getFila() && j != mov.getPosFinal().getColumna(); i += sumFil, j += sumCol){
+                 i != mov.getPosFinal().getFila() && j != mov.getPosFinal().getColumna(); i += sumFil, j += sumCol) {
                 if (hayPieza(i, j))
                     return true;
             }
             return false;
         }
-        return true;
+        return false;
     }
     public void ponPieza(Pieza figura, int fila, int columna){ // no entiendo por qué hay que hacer el mismo método metiendo fila y columna por separado y con posición luego, no podría usar siempre uno?
         tablero[fila][columna] = figura;
