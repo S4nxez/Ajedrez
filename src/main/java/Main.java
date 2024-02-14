@@ -10,10 +10,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Juego juego = new Juego();
         Tablero tablero = new Tablero();
-
         while(!mate) {
             tablero.pintarTablero();
-            jugada = sc.nextLine();
+            jugada = sc.nextLine().toLowerCase();
             if (juego.jugada(jugada, tablero) == null)
                 System.out.println("ERROR");
             else if (juego.jaque(tablero)) {

@@ -9,12 +9,12 @@ public class Rey extends Pieza{
 
     @Override
     public boolean validoMovimiento(Movimiento mov) {
-        return false;
-    }
+        return ((mov.esVertical() || mov.esHorizontal() || mov.esDiagonal()) &&
+                (Math.abs(mov.saltoHorizontal()) == 1 || Math.abs(mov.saltoVertical()) == 1));
+    }//darle un repaso
 
     @Override
     public String toString() {
         return getColor() ? "♔":"♚";
     }
-
 }
