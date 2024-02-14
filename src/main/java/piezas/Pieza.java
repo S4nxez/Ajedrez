@@ -3,8 +3,8 @@ package piezas;
 import Juego.Movimiento;
 
 public abstract class Pieza {
-    private boolean color;
-    private String nombre;
+    private final boolean color;
+    private final String nombre;
 
     public Pieza(boolean color, String nombre) {
         this.color = color;

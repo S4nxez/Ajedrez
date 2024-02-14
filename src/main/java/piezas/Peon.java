@@ -1,6 +1,7 @@
 package piezas;
 
 import Juego.Movimiento;
+import Juego.Tablero;
 
 public class Peon extends Pieza{
 
@@ -9,22 +10,25 @@ public class Peon extends Pieza{
     }
 
     @Override
-    public boolean validoMovimiento(Movimiento mov) {
+    public boolean validoMovimiento(Movimiento mov) {//
         int salto;
 
-        if (!mov.esVertical())
-            return false;
-
         salto = mov.saltoVertical();
-        if (mov.getPosInicial().getFila() == 6 && getColor()) //esto quiere decir que si es blancas y no ha movido aun
-            return (salto == -1 || salto == -2);
-        if (mov.getPosInicial().getFila() == 1 && !getColor())
-            return (salto == 1 || salto == 2);
-        if (getColor())
-            return salto == -1;
-        else
-            return salto == 1;
+
+        if (mov.esVertical()) {
+            if (mov.getPosInicial().getFila() == 6 && getColor()) //Si es blancas y no ha movido aun
+                return (salto == -1 || salto == -2);
+            if (mov.getPosInicial().getFila() == 1 && !getColor())
+                return (salto == 1 || salto == 2);
+            if (getColor())
+                return (salto == -1);
+            else
+                return (salto == 1);
+        } //else if (mov.esDiagonal())
+        //return (salto == 1 && tab.hayPieza(mov.getPosFinal()));
+        return (false);
     }
+
 
     @Override
     public String toString() {
