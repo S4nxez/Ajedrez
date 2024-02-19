@@ -1,6 +1,7 @@
 package piezas;
 
 import Juego.Movimiento;
+import Juego.Tablero;
 
 public class Rey extends Pieza{
     public Rey(boolean color, String nombre) {
@@ -8,10 +9,11 @@ public class Rey extends Pieza{
     }
 
     @Override
-    public boolean validoMovimiento(Movimiento mov) {
+    public boolean validoMovimiento(Movimiento mov, Tablero tab) {
         return ((mov.esVertical() || mov.esHorizontal() || mov.esDiagonal()) &&
-                (Math.abs(mov.saltoHorizontal()) == 1 || Math.abs(mov.saltoVertical()) == 1));
-    }//darle un repaso
+                (Math.abs(mov.saltoHorizontal() + mov.saltoVertical()) == 1 ||
+                        mov.esDiagonal() && Math.abs(mov.saltoVertical()) == 1));
+    }
 
     @Override
     public String toString() {

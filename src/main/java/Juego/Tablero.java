@@ -57,14 +57,12 @@ public class Tablero {
                 if (hayPieza(i, mov.getPosInicial().getColumna()))
                     return true;
             }
-            return false;
         } else if (mov.esHorizontal()) {
             sum = (mov.getPosInicial().getColumna() > mov.getPosFinal().getColumna()) ? - 1 : 1;
             for (int i = mov.getPosInicial().getColumna() + sum; i != mov.getPosFinal().getColumna(); i += sum) {
                 if (hayPieza(mov.getPosInicial().getFila(), i))
                     return true;
             }
-            return false;
         }else if(mov.esDiagonal()){
             int sumFil = (mov.getPosInicial().getFila() > mov.getPosFinal().getFila()) ? -1 : 1;
             int sumCol  = (mov.getPosInicial().getColumna() > mov.getPosFinal().getColumna()) ? -1 : 1;
@@ -74,7 +72,6 @@ public class Tablero {
                 if (hayPieza(i, j))
                     return true;
             }
-            return false;
         }
         return false;
     }

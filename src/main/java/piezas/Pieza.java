@@ -1,6 +1,7 @@
 package piezas;
 
 import Juego.Movimiento;
+import Juego.Tablero;
 
 public abstract class Pieza {
     private final boolean color;
@@ -15,7 +16,7 @@ public abstract class Pieza {
         return color;
     }
 
-    public abstract boolean validoMovimiento(Movimiento mov);
+    public abstract boolean  validoMovimiento(Movimiento mov, Tablero tab);
 
     @Override
     public String toString() {

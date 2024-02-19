@@ -1,6 +1,7 @@
 package piezas;
 
 import Juego.Movimiento;
+import Juego.Tablero;
 
 public class Caballo extends Pieza{
 
@@ -9,7 +10,7 @@ public class Caballo extends Pieza{
     }
 
     @Override
-    public boolean validoMovimiento(Movimiento mov) {
+    public boolean validoMovimiento(Movimiento mov, Tablero tab) {
         return (Math.abs(mov.saltoHorizontal()) == 2 && Math.abs(mov.saltoVertical()) == 1) ||
                 (Math.abs(mov.saltoHorizontal()) == 1 && Math.abs(mov.saltoVertical()) == 2);
     }
