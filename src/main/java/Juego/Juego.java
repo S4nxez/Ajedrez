@@ -12,7 +12,6 @@ public class Juego {
 
     public void setTurno(boolean nuevoTurno) {
         this.elTurno = nuevoTurno;
-
     }
 
     public Movimiento jugada(String jugada, Tablero tablero) { //control de entrada solo creo que se puede hacer mas limpio creando una excepcion
@@ -31,10 +30,18 @@ public class Juego {
         Pieza figura = tablero.getPieza(psIni);
         Movimiento movimiento = new Movimiento(psIni, psFin);
         if (figura.validoMovimiento(movimiento, tablero) && !tablero.hayPiezasEntre(movimiento)) {
+            boolean hayAux = false;
+            Pieza aux = null;
+            if (tablero.hayPieza(psFin)) {
+                aux = tablero.getPieza(psFin);
+                hayAux = true;
+            }
             tablero.quitaPieza(psIni);
             tablero.ponPieza(figura, psFin);
             if (jaque(tablero, ubicarRey(tablero, getTurno()))) {
                 tablero.quitaPieza(psFin);
+                if (hayAux)
+                    tablero.ponPieza(aux, psFin);
                 tablero.ponPieza(figura, psIni);
                 System.out.println("cuidado, te estas poniendo en jaque");
                 return null;
@@ -56,7 +63,7 @@ public class Juego {
     }
 
     public boolean jaque(Tablero tablero, Posicion posRey) {
-        for (int i = 0; i < 8; i++) { //Busco si alguna pieza puede comerse al rey
+        for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (tablero.getPieza(i, j) != null && tablero.getPieza(i, j).getColor() == !tablero.getPieza(posRey).getColor() &&
                         tablero.getPieza(i, j).validoMovimiento(new Movimiento(new Posicion(i, j), posRey), tablero) &&

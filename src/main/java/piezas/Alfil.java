@@ -13,6 +13,7 @@ public class Alfil extends Pieza{
         return mov.esDiagonal();
     }
 
+
     @Override
     public String toString() {
         return getColor() ? "♗":"♝";

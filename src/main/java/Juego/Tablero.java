@@ -1,6 +1,9 @@
 package Juego;
 
+import lombok.Getter;
 import piezas.*;
+
+@Getter
 public class Tablero {
     private Pieza[][] tablero;
     public Tablero() {
@@ -11,10 +14,10 @@ public class Tablero {
         }
         tablero[7][0] = tablero[7][7] = new Torre(true, "♖");
         tablero[0][7] = tablero[0][0] = new Torre(false,"♜");
-        tablero[7][1] = tablero[7][6] = new Caballo(true, "♘");
-        tablero[0][1] = tablero[0][6] = new Caballo(false,"♞");
-        tablero[7][2] = tablero[7][5] = new Alfil(true, "♗");
-        tablero[0][2] = tablero[0][5] = new Alfil(false, "♝");
+//        tablero[7][1] = tablero[7][6] = new Caballo(true, "♘");
+//        tablero[0][1] = tablero[0][6] = new Caballo(false,"♞");
+//        tablero[7][2] = tablero[7][5] = new Alfil(true, "♗");
+//        tablero[0][2] = tablero[0][5] = new Alfil(false, "♝");
         tablero[7][4] = new Rey(true,"♔");
         tablero[0][4] = new Rey(false, "♚");
         tablero[7][3] = new Reina(true, "♕");
@@ -75,7 +78,7 @@ public class Tablero {
         }
         return false;
     }
-    public void ponPieza(Pieza figura, int fila, int columna){ // no entiendo por qué hay que hacer el mismo método metiendo fila y columna por separado y con posición luego, no podría usar siempre uno?
+    public void ponPieza(Pieza figura, int fila, int columna){
         tablero[fila][columna] = figura;
     }
     public void ponPieza(Pieza figura, Posicion pos){

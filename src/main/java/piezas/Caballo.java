@@ -4,7 +4,6 @@ import Juego.Movimiento;
 import Juego.Tablero;
 
 public class Caballo extends Pieza{
-
     public Caballo(boolean color, String nombre) {
         super(color, nombre);
     }
