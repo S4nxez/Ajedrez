@@ -1,5 +1,8 @@
 package Juego;
 
+import lombok.Getter;
+
+@Getter
 public class Movimiento {
     private Posicion posInicial;
     private Posicion posFinal;
@@ -8,15 +11,6 @@ public class Movimiento {
         this.posInicial = posInicial;
         this.posFinal = posFinal;
     }
-
-    public Posicion getPosFinal() {
-        return posFinal;
-    }
-
-    public Posicion getPosInicial() {
-        return posInicial;
-    }
-
     public boolean esVertical(){
         return getPosFinal().getColumna() == getPosInicial().getColumna();
     }

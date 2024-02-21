@@ -30,17 +30,14 @@ public class Juego {
         Pieza figura = tablero.getPieza(psIni);
         Movimiento movimiento = new Movimiento(psIni, psFin);
         if (figura.validoMovimiento(movimiento, tablero) && !tablero.hayPiezasEntre(movimiento)) {
-            boolean hayAux = false;
             Pieza aux = null;
-            if (tablero.hayPieza(psFin)) {
+            if (tablero.hayPieza(psFin))
                 aux = tablero.getPieza(psFin);
-                hayAux = true;
-            }
             tablero.quitaPieza(psIni);
             tablero.ponPieza(figura, psFin);
             if (jaque(tablero, ubicarRey(tablero, getTurno()))) {
                 tablero.quitaPieza(psFin);
-                if (hayAux)
+                if (aux != null)
                     tablero.ponPieza(aux, psFin);
                 tablero.ponPieza(figura, psIni);
                 System.out.println("cuidado, te estas poniendo en jaque");
@@ -65,7 +62,7 @@ public class Juego {
     public boolean jaque(Tablero tablero, Posicion posRey) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (tablero.getPieza(i, j) != null && tablero.getPieza(i, j).getColor() == !tablero.getPieza(posRey).getColor() &&
+                if (tablero.getPieza(i, j) != null && tablero.getPieza(i, j).getColor() != tablero.getPieza(posRey).getColor() &&
                         tablero.getPieza(i, j).validoMovimiento(new Movimiento(new Posicion(i, j), posRey), tablero) &&
                         !tablero.hayPiezasEntre(new Movimiento(new Posicion(i, j), posRey)))
                     return true;

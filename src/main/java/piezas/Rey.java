@@ -19,8 +19,10 @@ public class Rey extends Pieza{
             this.movido = true;
         }
 
-        if ((mov.esVertical() || mov.esHorizontal() || mov.esDiagonal()) && (Math.abs(mov.saltoVertical()) == 1) ||
-                (Math.abs(mov.saltoHorizontal()) == 1)) {
+        if ((mov.esVertical() || mov.esHorizontal() || mov.esDiagonal()) &&
+                (Math.abs(mov.saltoVertical()) == 1 && mov.saltoHorizontal() == 0) ||
+                (Math.abs(mov.saltoHorizontal()) == 1 && mov.saltoVertical() == 0) ||
+                (Math.abs(mov.saltoHorizontal()) == 1) && mov.esDiagonal()) {
             ret = true;
             this.movido = true;
         }
