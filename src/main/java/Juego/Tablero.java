@@ -1,9 +1,7 @@
 package Juego;
 
-import lombok.Getter;
 import piezas.*;
 
-@Getter
 public class Tablero {
     private Pieza[][] tablero;
     public Tablero() {

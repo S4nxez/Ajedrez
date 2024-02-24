@@ -1,10 +1,13 @@
 package piezas;
 
+import Juego.Juego;
 import Juego.Movimiento;
 import Juego.Tablero;
+import lombok.Getter;
 
+@Getter
 public class Rey extends Pieza{
-    boolean movido;
+    private boolean movido;
     public Rey(boolean color, String nombre) {
         super(color, nombre);
         this.movido = false;
@@ -13,12 +16,10 @@ public class Rey extends Pieza{
     @Override
     public boolean validoMovimiento(Movimiento mov, Tablero tab) {
         boolean ret = false;
-
-        if (!movido && mov.esHorizontal() && Math.abs(mov.saltoHorizontal()) == 2 && validoEnroque(mov, tab)){
-            ret = true;
-            this.movido = true;
+        Juego   juego = new Juego();
+        if (juego.jaque(tab, mov.getPosFinal())) {
+            return false;
         }
-
         if ((mov.esVertical() || mov.esHorizontal() || mov.esDiagonal()) &&
                 (Math.abs(mov.saltoVertical()) == 1 && mov.saltoHorizontal() == 0) ||
                 (Math.abs(mov.saltoHorizontal()) == 1 && mov.saltoVertical() == 0) ||
