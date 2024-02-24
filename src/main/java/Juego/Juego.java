@@ -3,6 +3,7 @@ package Juego;
 import piezas.Pieza;
 import piezas.Rey;
 
+
 public class Juego {
     private boolean elTurno = true; // 0->Negras 1->Blancas
 
@@ -30,6 +31,16 @@ public class Juego {
         Pieza figura = tablero.getPieza(psIni);
         Movimiento movimiento = new Movimiento(psIni, psFin);
         if (figura.validoMovimiento(movimiento, tablero) && !tablero.hayPiezasEntre(movimiento)) {
+            if (figura instanceof Rey && validoEnroque(movimiento, tablero) &&
+                    !jaque(tablero, ubicarRey(tablero, getTurno())) && !((Rey) figura).isMovido()) {
+                Pieza torre = tablero.getPieza(movimiento.getPosInicial().getFila(), 7);
+                Pieza rey = tablero.getPieza(movimiento.getPosInicial());
+
+                tablero.quitaPieza(movimiento.getPosInicial().getFila(), 7);
+                tablero.ponPieza(torre, movimiento.getPosInicial().getFila(), 5);
+                tablero.quitaPieza(movimiento.getPosInicial().getFila(), 4);
+                tablero.ponPieza( rey, movimiento.getPosInicial().getFila(), 6);
+            }
             Pieza aux = null;
             if (tablero.hayPieza(psFin))
                 aux = tablero.getPieza(psFin);
@@ -47,7 +58,32 @@ public class Juego {
             return null;
         return movimiento;
     }
+    public boolean validoEnroque(Movimiento mov, Tablero tab) {
+        int fila = mov.getPosInicial().getFila();
+        int columna = mov.getPosInicial().getColumna();
+        Pieza rey = tab.getPieza(mov.getPosInicial());
 
+        if (mov.saltoHorizontal() == 2) {
+            if (rey.getColor() && (fila == 7 && columna == 4 && !tab.hayPieza(fila, 5) && !tab.hayPieza(fila, 6)
+                    && tab.hayPieza(fila, 7) && tab.getPieza(fila, 7).toString().equals("♖"))) {
+                return true;
+            } else if (!rey.getColor() && (fila == 0 && columna == 4 && !tab.hayPieza(fila, 5) && !tab.hayPieza(fila, 6)
+                    && tab.hayPieza(fila, 7) && tab.getPieza(fila, 7).toString().equals("♜"))) {
+                return true;
+            }
+        } else {
+            if (rey.getColor() && (fila == 7 && columna == 4 && !tab.hayPieza(fila, 3) && !tab.hayPieza(fila, 2)
+                    && !tab.hayPieza(fila, 1) && tab.hayPieza(fila, 0) &&
+                    tab.getPieza(fila, 0).toString().equals("♖"))) {
+                return true;
+            } else if (!rey.getColor() && (fila == 0 && columna == 4 && !tab.hayPieza(fila, 3) && !tab.hayPieza(fila, 2)
+                    && !tab.hayPieza(fila, 1) && tab.hayPieza(fila, 0) &&
+                    tab.getPieza(fila, 0).toString().equals("♜"))) {
+                return true;
+            }
+        }
+        return false;
+    }
     public Posicion ubicarRey(Tablero tablero, boolean color) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
