@@ -73,20 +73,19 @@ public class Juego {
             torre = tab.getPieza(fila, 0);
         if ( torre.getColor() != rey.getColor() || torre.getClass() != Torre.class || ((Torre) torre).isMovido())
             return false;
-       /* for (int i = columna; i != mov.getPosFinal().getColumna(); i += sum)//esto cuando lo testeo da null pointer dentro de jaque porque le mando un nulo y da por hecho que va a ser un rey
-            if (jaque(tab, new Posicion(fila, i)))
-                return false;*/
-        if (mov.saltoHorizontal() == 2) {
-            if (rey.getColor() && (!tab.hayPieza(fila, 6))) {
-                return true;
-            } else
-                return !rey.getColor() && (!tab.hayPieza(fila, 5) && !tab.hayPieza(fila, 6));
-        } else {
-            if (rey.getColor() && (!tab.hayPieza(fila, 3) && !tab.hayPieza(fila, 2) && !tab.hayPieza(fila, 1) && tab.hayPieza(fila, 0))) {
-                return true;
-            } else
-                return !rey.getColor() && (!tab.hayPieza(fila, 3) && !tab.hayPieza(fila, 2) && !tab.hayPieza(fila, 1));
-        }
+
+        int i = columna + sum; // hay un error tomo como referencia la posicion final del rey y cuando hago el enroque largo si hay una pieza en b1 lo hace igual
+        while ( i != mov.getPosFinal().getColumna()){
+            i += sum;
+            if  (tab.hayPieza(fila, i))
+                return false;
+           tab.quitaPieza(fila, i - sum);
+           tab.ponPieza(rey, fila, i);
+           if (jaque(tab, new Posicion(fila, i)))
+               return false;
+       }
+        tab.ponPieza(rey, fila, i);
+        return !jaque(tab, new Posicion(fila, i));
     }
     private void ejecutoEnroque(Tablero tablero, Movimiento movimiento) {
         int     psIniFila = movimiento.getPosInicial().getFila();
