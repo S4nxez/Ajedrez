@@ -2,11 +2,11 @@ package Juego;
 
 import piezas.Pieza;
 import piezas.Rey;
+import piezas.Torre;
 
 
 public class Juego {
     private boolean elTurno = true; // 0->Negras 1->Blancas
-    private boolean acaboDeEnrocar = false;
     public boolean getTurno() {
         return elTurno;
     }
@@ -15,7 +15,7 @@ public class Juego {
         this.elTurno = nuevoTurno;
     }
 
-    public Movimiento jugada(String jugada, Tablero tablero) { //creo que se puede hacer mas limpio creando una excepcion
+    public Movimiento jugada(String jugada, Tablero tablero) { //creo que se puede hacer más limpio creando una excepción
         if (jugada == null || jugada.length() != 4)
             return null;
         if (!posValida(jugada.charAt(0) - 'a', jugada.charAt(1) - '1') ||
@@ -34,8 +34,12 @@ public class Juego {
         Posicion psIni = movimiento.getPosInicial(),
                  psFin = movimiento.getPosFinal();
         Pieza    figura = tablero.getPieza(psIni);
-        acaboDeEnrocar = false;
 
+        if (figura instanceof  Rey && Math.abs(movimiento.saltoHorizontal()) == 2 && movimiento.esHorizontal() &&
+                !tablero.hayPiezasEntre(movimiento) && validoEnroque(movimiento, tablero) && !(((Rey) figura).isMovido())) {
+            ejecutoEnroque(tablero, movimiento);
+            return true;
+        }
         if (figura.validoMovimiento(movimiento, tablero) && !tablero.hayPiezasEntre(movimiento)) {
             Pieza aux = null;
             if (tablero.hayPieza(psFin))
@@ -50,59 +54,59 @@ public class Juego {
                 System.out.println("Te estas poniendo en jaque");
                 return false;
             }
-        } else if (figura instanceof  Rey && acaboDeEnrocar)
             return true;
-        return true;
+        } else
+            return false;
     }
     public boolean validoEnroque(Movimiento mov, Tablero tab) {
-        int fila = mov.getPosInicial().getFila();
-        int columna = mov.getPosInicial().getColumna();
-        Pieza rey = tab.getPieza(mov.getPosInicial());
+        int     fila = mov.getPosInicial().getFila();
+        int     columna = mov.getPosInicial().getColumna();
+        int     sum = (mov.saltoHorizontal() == 2) ? 1 : -1;
+        Pieza   rey = tab.getPieza(mov.getPosInicial());
+        Pieza   torre;
+
         if (jaque(tab, ubicarRey(tab, getTurno() ))|| ((Rey) rey).isMovido() || tab.hayPiezasEntre(mov))
             return false;
+        if (mov.saltoHorizontal() > 0)
+            torre = tab.getPieza(fila, 7);
+        else
+            torre = tab.getPieza(fila, 0);
+        if ( torre.getColor() != rey.getColor() || torre.getClass() != Torre.class || ((Torre) torre).isMovido())
+            return false;
+       /* for (int i = columna; i != mov.getPosFinal().getColumna(); i += sum)//esto cuando lo testeo da null pointer dentro de jaque porque le mando un nulo y da por hecho que va a ser un rey
+            if (jaque(tab, new Posicion(fila, i)))
+                return false;*/
         if (mov.saltoHorizontal() == 2) {
-            if (rey.getColor() && (fila == 7 && columna == 4 && !tab.hayPieza(fila, 6)
-                    && tab.hayPieza(fila, 7) && tab.getPieza(fila, 7).toString().equals("♖"))) {
+            if (rey.getColor() && (!tab.hayPieza(fila, 6))) {
                 return true;
-            } else if (!rey.getColor() && (fila == 0 && columna == 4 && !tab.hayPieza(fila, 5) && !tab.hayPieza(fila, 6)
-                    && tab.hayPieza(fila, 7) && tab.getPieza(fila, 7).toString().equals("♜"))) {
-                return true;
-            }
+            } else
+                return !rey.getColor() && (!tab.hayPieza(fila, 5) && !tab.hayPieza(fila, 6));
         } else {
-            if (rey.getColor() && (fila == 7 && columna == 4 && !tab.hayPieza(fila, 3) && !tab.hayPieza(fila, 2)
-                    && !tab.hayPieza(fila, 1) && tab.hayPieza(fila, 0) &&
-                    tab.getPieza(fila, 0).toString().equals("♖"))) {
+            if (rey.getColor() && (!tab.hayPieza(fila, 3) && !tab.hayPieza(fila, 2) && !tab.hayPieza(fila, 1) && tab.hayPieza(fila, 0))) {
                 return true;
-            } else if (!rey.getColor() && (fila == 0 && columna == 4 && !tab.hayPieza(fila, 3) && !tab.hayPieza(fila, 2)
-                    && !tab.hayPieza(fila, 1) && tab.hayPieza(fila, 0) &&
-                    tab.getPieza(fila, 0).toString().equals("♜"))) {
-                return true;
-            }
+            } else
+                return !rey.getColor() && (!tab.hayPieza(fila, 3) && !tab.hayPieza(fila, 2) && !tab.hayPieza(fila, 1));
         }
-        return false;
     }
-    public boolean ejecutoEnroque(Tablero tablero, Movimiento movimiento) {
-        Posicion psIni = movimiento.getPosInicial();
-        Pieza    rey = tablero.getPieza(psIni);
+    private void ejecutoEnroque(Tablero tablero, Movimiento movimiento) {
+        int     psIniFila = movimiento.getPosInicial().getFila();
+        Pieza   rey = tablero.getPieza(psIniFila, 4);
 
         if (movimiento.saltoHorizontal() == 2) {
-            Pieza torre = tablero.getPieza(psIni.getFila(), 7);
+            Pieza torre = tablero.getPieza(psIniFila, 7);
 
-            tablero.quitaPieza(psIni.getFila(), 7);
-            tablero.ponPieza(torre, psIni.getFila(), 5);
-            tablero.quitaPieza(psIni.getFila(), 4);
-            tablero.ponPieza( rey, psIni.getFila(), 6);
-            acaboDeEnrocar = true;
+            tablero.quitaPieza(psIniFila, 7);
+            tablero.ponPieza(torre, psIniFila, 5);
+            tablero.quitaPieza(psIniFila, 4);
+            tablero.ponPieza( rey, psIniFila, 6);
         } else if (movimiento.saltoHorizontal() == -2) {
-            Pieza torre = tablero.getPieza(psIni.getFila(), 0);
+            Pieza torre = tablero.getPieza(psIniFila, 0);
 
-            tablero.quitaPieza(psIni.getFila(), 0);
-            tablero.ponPieza(torre, psIni.getFila(), 3);
-            tablero.quitaPieza(psIni.getFila(), 4);
-            tablero.ponPieza(rey, psIni.getFila(), 2);
-            acaboDeEnrocar = true;
+            tablero.quitaPieza(psIniFila, 0);
+            tablero.ponPieza(torre, psIniFila, 3);
+            tablero.quitaPieza(psIniFila, 4);
+            tablero.ponPieza(rey, psIniFila, 2);
         }
-        return acaboDeEnrocar;
     }
     public Posicion ubicarRey(Tablero tablero, boolean color) {
         for (int i = 0; i < 8; i++) {

@@ -15,15 +15,12 @@ public class Rey extends Pieza{
 
     @Override
     public boolean validoMovimiento(Movimiento mov, Tablero tab) {
-        Juego   juego = new Juego();
         boolean ret = false;
         int     saltoVertical = Math.abs(mov.saltoVertical()),
                 saltoHorizontal = Math.abs(mov.saltoHorizontal());
 
         if ((mov.esVertical() || mov.esHorizontal() || mov.esDiagonal()) && (saltoVertical == 1 && saltoHorizontal == 0)
-                || (saltoHorizontal == 1 && saltoVertical == 0) || (saltoHorizontal == 1 && mov.esDiagonal())
-                || (saltoHorizontal == 2 && mov.esHorizontal() && !movido && juego.validoEnroque(mov, tab)
-                    && juego.ejecutoEnroque(tab,mov) )) {
+                || (saltoHorizontal == 1 && saltoVertical == 0) || (saltoHorizontal == 1 && mov.esDiagonal())) { // aqui esta el fallo
             ret = true;
             this.movido = true;
         }
