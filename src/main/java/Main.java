@@ -1,6 +1,6 @@
 import Juego.Juego;
 import Juego.Tablero;
-
+import Juego.Movimiento;
 import java.util.Scanner;
 
 public class Main {
@@ -12,8 +12,12 @@ public class Main {
         while(!juego.jaqueMate(tablero, juego.ubicarRey(tablero, juego.getTurno()))) {
             tablero.pintarTablero();
             jugada = sc.nextLine().toLowerCase();
-            if (juego.jugada(jugada, tablero) == null)
-                System.out.println("ERROR");
+            Movimiento mov = juego.jugada(jugada, tablero);
+
+            if (mov == null)
+                System.out.println("Entrada no valida");
+            else if (!juego.ejecutarJugada(mov, tablero))
+                System.out.println("Movimiento ilegal");
             else if (juego.jaque(tablero, juego.ubicarRey(tablero, !juego.getTurno()))) {
                 System.out.println("Jaque");
                 juego.setTurno(!juego.getTurno());
