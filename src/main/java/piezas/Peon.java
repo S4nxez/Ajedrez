@@ -34,7 +34,7 @@ public class Peon extends Pieza{
 
     @Override
     public String toString() {
-        return getColor() ? "♙":"♟";
+        return getColor() ? "File:src/main/resources/imagenes/PeonBlanco.png":"File:src/main/resources/imagenes/PeonNegro.png";
     }
 
 }

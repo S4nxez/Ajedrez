@@ -1,0 +1,11 @@
+
+1
+java:S1700"Rename field "tablero"(Èº¹úÿÿÿÿ
+@	java:S106"+Replace this use of System.out by a logger.(•°¾Œ
+E	java:S106 "+Replace this use of System.out by a logger.(£€Šúÿÿÿÿÿ
+E	java:S106""+Replace this use of System.out by a logger.(Á…ØÈıÿÿÿÿ
+E	java:S106$"+Replace this use of System.out by a logger.(Óı¯¤øÿÿÿÿ
+E	java:S106("+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ
+E	java:S106+"+Replace this use of System.out by a logger.(û¼õÑıÿÿÿÿ
+g
+java:S37764"RRefactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.(ïŸz

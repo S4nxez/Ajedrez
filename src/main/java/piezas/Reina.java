@@ -15,7 +15,7 @@ public class Reina extends Pieza{
 
     @Override
     public String toString() {
-        return getColor() ? "♕":"♛";
+        return getColor() ? "File:src/main/resources/imagenes/ReinaBlanca.png" : "File:src/main/resources/imagenes/ReinaNegra.png";
     }
 
 }

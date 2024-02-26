@@ -16,16 +16,13 @@ public class Juego {
     }
 
     public Movimiento jugada(String jugada, Tablero tablero) { //creo que se puede hacer más limpio creando una excepción
-        if (jugada == null || jugada.length() != 4)
-            return null;
-        if (!posValida(jugada.charAt(0) - 'a', jugada.charAt(1) - '1') ||
-                !posValida(jugada.charAt(2) - 'a', jugada.charAt(3) - '1'))
-            return null;
-        Posicion psIni = new Posicion((7 - (jugada.charAt(1) - '1')), (jugada.charAt(0) - 'a'));
+
+        Posicion psIni = new Posicion(( (jugada.charAt(0) - '0')), (jugada.charAt(1) - '0'));
         // Como mínimo introduce un 1 equivalente al 0 del array
         if (tablero.getPieza(psIni) == null || tablero.getPieza(psIni).getColor() != elTurno)
             return null;
-        Posicion psFin = new Posicion((7 - (jugada.charAt(3) - '1')), (jugada.charAt(2) - 'a'));
+
+        Posicion psFin = new Posicion(( (jugada.charAt(2) - '0')), (jugada.charAt(3) - '0'));
         if (tablero.getPieza(psFin) != null && tablero.getPieza(psFin).getColor() == tablero.getPieza(psIni).getColor())
             return null;
         return new Movimiento(psIni, psFin);

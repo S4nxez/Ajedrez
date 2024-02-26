@@ -15,6 +15,6 @@ public class Alfil extends Pieza{
 
     @Override
     public String toString() {
-        return getColor() ? "♗":"♝";
+        return getColor() ? "File:src/main/resources/imagenes/AlfilBlanco.png" : "File:src/main/resources/imagenes/AlfilNegro.png";
     }
 }
