@@ -1,7 +1,7 @@
 package piezas;
 
-import Juego.Movimiento;
-import Juego.Tablero;
+import juego.Movimiento;
+import juego.Tablero;
 
 public class Peon extends Pieza{
 

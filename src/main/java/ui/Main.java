@@ -1,6 +1,8 @@
-import Juego.Juego;
-import Juego.Tablero;
-import Juego.Movimiento;
+package ui;
+
+import juego.Juego;
+import juego.Tablero;
+import juego.Movimiento;
 import java.util.Scanner;
 
 public class Main {

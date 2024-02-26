@@ -1,7 +1,7 @@
 package piezas;
 
-import Juego.Movimiento;
-import Juego.Tablero;
+import juego.Movimiento;
+import juego.Tablero;
 
 public class Caballo extends Pieza{
     public Caballo(boolean color, String nombre) {

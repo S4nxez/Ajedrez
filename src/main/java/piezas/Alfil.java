@@ -1,7 +1,7 @@
 package piezas;
 
-import Juego.Movimiento;
-import Juego.Tablero;
+import juego.Movimiento;
+import juego.Tablero;
 
 public class Alfil extends Pieza{
     public Alfil(boolean color, String nombre) {
