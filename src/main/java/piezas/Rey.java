@@ -1,8 +1,7 @@
 package piezas;
 
-import Juego.Juego;
-import Juego.Movimiento;
-import Juego.Tablero;
+import juego.Movimiento;
+import juego.Tablero;
 import lombok.Getter;
 
 @Getter

@@ -1,4 +1,4 @@
-package Juego;
+package juego;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
