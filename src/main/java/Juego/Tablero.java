@@ -13,13 +13,13 @@ public class Tablero {
         tablero[7][0] = tablero[7][7] = new Torre(true, "♖");
         tablero[0][7] = tablero[0][0] = new Torre(false,"♜");
         tablero[7][1] = tablero[7][6] = new Caballo(true, "♘");
-       // tablero[0][1] = tablero[0][6] = new Caballo(false,"♞");
-       // tablero[7][2] = tablero[7][5] = new Alfil(true, "♗");
-        // tablero[0][2] = tablero[0][5] = new Alfil(false, "♝");
+        tablero[0][1] = tablero[0][6] = new Caballo(false,"♞");
+        tablero[7][2] = tablero[7][5] = new Alfil(true, "♗");
+         tablero[0][2] = tablero[0][5] = new Alfil(false, "♝");
         tablero[7][4] = new Rey(true,"♔");
         tablero[0][4] = new Rey(false, "♚");
-     //   tablero[7][3] = new Reina(true, "♕");
-       // tablero[0][3] = new Reina(false, "♛");
+        tablero[7][3] = new Reina(true, "♕");
+        tablero[0][3] = new Reina(false, "♛");
     }
 
     public void pintarTablero() {
