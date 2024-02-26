@@ -20,6 +20,10 @@ import java.util.ResourceBundle;
 
 public class TableroController implements Initializable {
 
+    String jugada;
+    Juego juego = new Juego();
+    Tablero tablero = new Tablero();
+    String movimiento[] = new String[2];
     @FXML
     private Label label;
     @FXML
@@ -33,8 +37,27 @@ public class TableroController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         pintarTablero();
-        jugar();
     }
+    public void accion(String coordenadas) {
+        //manejar la jugada, que no haga click en el vacio, que no
+        //llamar a juego
+        if (movimiento[0] == null) {
+            //metes el movimiento como si fuese el primero
+            movimiento[0] = coordenadas;
+        } else {
+            if (movimiento[1] == null) {
+                //metes el movimiento como si fuese el segundo, llamas a realizar movimiento
+                movimiento[1] = coordenadas;
+                Movimiento mov = juego.jugada(movimiento[0] + movimiento[1], tablero);
+                if (mov == null)
+                    label.setText("Entrada no valida");
+                else if (!juego.ejecutarJugada(mov, tablero))
+                    label.setText("Movimiento ilegal");
+                else if (juego.jaque(tablero, juego.ubicarRey(tablero, !juego.getTurno()))) {
+                    label.setText("Jaque");
+                    if (juego.jaqueMate(tablero,juego.ubicarRey(tablero, !juego.getTurno())))
+                        label.setText("Jaque Mate con tomate");
+                    juego.setTurno(!juego.getTurno());
 
     private void jugar() {
 /*        while(!juego.jaqueMate(tablero, juego.ubicarRey(tablero, juego.getTurno()))) {
@@ -42,16 +65,16 @@ public class TableroController implements Initializable {
             jugada = "TODO";
             Movimiento mov = juego.jugada(jugada, tablero);
 
-            if (mov == null)
-                label.setText("Entrada no valida");
-            else if (!juego.ejecutarJugada(mov, tablero))
-                label.setText("Movimiento ilegal");
-            else if (juego.jaque(tablero, juego.ubicarRey(tablero, !juego.getTurno()))) {
-                label.setText("Jaque");
-                juego.setTurno(!juego.getTurno());
-            }else
-                juego.setTurno(!juego.getTurno());
+                } else
+                    juego.setTurno(!juego.getTurno());
+            }
+            movimiento[0] = null;
+            movimiento[1] = null;
         }
+        pintarTablero();
+    }
+
+    public void pintarTablero() {
         tablero.pintarTablero();
         label.setText("Jaque Mate");*/
     }
@@ -85,6 +108,7 @@ public class TableroController implements Initializable {
             for (int j = 0; j < 8; j++) {
                 Pane pane = new Pane();
                 //observable en cada casilla que hace que cada vez que cliquee llame al metodo action
+                pane.setOnMouseClicked(e -> accion(GridPane.getRowIndex((Node) e.getSource()) + GridPane.getColumnIndex((Node) e.getSource()).toString()));
                 pane.setOnMouseClicked(e -> accion(GridPane.getColumnIndex((Node) e.getSource()).toString()  + GridPane.getRowIndex((Node) e.getSource())));
                 if ((i + j) % 2 == 0) {
                     pane.setStyle("-fx-background-color: #eeeed4");

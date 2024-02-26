@@ -16,6 +16,14 @@ public class Juego {
     }
 
     public Movimiento jugada(String jugada, Tablero tablero) { //creo que se puede hacer más limpio creando una excepción
+
+        Posicion psIni = new Posicion(( (jugada.charAt(0) - '0')), (jugada.charAt(1) - '0'));
+        // Como mínimo introduce un 1 equivalente al 0 del array
+        if (tablero.getPieza(psIni) == null || tablero.getPieza(psIni).getColor() != elTurno)
+            return null;
+
+        Posicion psFin = new Posicion(( (jugada.charAt(2) - '0')), (jugada.charAt(3) - '0'));
+
         System.out.println("jugada: "+jugada +"\n");
         if (jugada == null || jugada.length() != 4)
             return null;
@@ -124,7 +132,7 @@ public class Juego {
         }
         return null;
     }
-
+  
     public boolean jaque(Tablero tablero, Posicion posRey) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {

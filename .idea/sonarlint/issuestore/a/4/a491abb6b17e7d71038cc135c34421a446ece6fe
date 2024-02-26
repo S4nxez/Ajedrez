@@ -1,0 +1,14 @@
+
+R
+java:S1066"/Merge this if statement with the enclosing one.(èãÚõıÿÿÿÿ8Çù´½Ş1
+>
+java:S1110"!Remove these useless parentheses.(‹ƒÖğ8Şú´½Ş1
+C
+java:S1110"!Remove these useless parentheses.(—¦‹èÿÿÿÿÿ8àú´½Ş1
+?
+java:S1659 "#Declare "psFin" on a separate line.(èà£I8áú´½Ş1
+]
+java:S6201#"@Replace this instanceof check and cast with 'instanceof Rey rey'(º’ª8âú´½Ş1
+G	java:S1063"+Replace this use of System.out by a logger.(‡ĞŸ8äú´½Ş1
+G
+java:S1659…"*Declare "nuevaColumna" on a separate line.(Ãæ8ğú´½Ş1
