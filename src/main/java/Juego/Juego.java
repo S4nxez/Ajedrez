@@ -16,18 +16,23 @@ public class Juego {
     }
 
     public Movimiento jugada(String jugada, Tablero tablero) { //creo que se puede hacer más limpio creando una excepción
+        System.out.println("jugada: "+jugada +"\n");
         if (jugada == null || jugada.length() != 4)
             return null;
+        System.out.println("1");
         if (!posValida(jugada.charAt(0) - 'a', jugada.charAt(1) - '1') ||
                 !posValida(jugada.charAt(2) - 'a', jugada.charAt(3) - '1'))
             return null;
+        System.out.println("2");
         Posicion psIni = new Posicion((7 - (jugada.charAt(1) - '1')), (jugada.charAt(0) - 'a'));
         // Como mínimo introduce un 1 equivalente al 0 del array
         if (tablero.getPieza(psIni) == null || tablero.getPieza(psIni).getColor() != elTurno)
             return null;
+        System.out.println("3");
         Posicion psFin = new Posicion((7 - (jugada.charAt(3) - '1')), (jugada.charAt(2) - 'a'));
         if (tablero.getPieza(psFin) != null && tablero.getPieza(psFin).getColor() == tablero.getPieza(psIni).getColor())
             return null;
+        System.out.println("4");
         return new Movimiento(psIni, psFin);
     }
     public boolean ejecutarJugada(Movimiento movimiento, Tablero tablero){

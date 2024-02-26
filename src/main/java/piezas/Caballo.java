@@ -16,6 +16,6 @@ public class Caballo extends Pieza{
 
     @Override
     public String toString() {
-        return getColor() ? "♘":"♞";
+        return getColor() ? "File:src/main/resources/imagenes/CaballoBlanco.png" : "File:src/main/resources/imagenes/CaballoNegro.png";
     }
 }

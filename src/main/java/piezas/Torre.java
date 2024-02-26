@@ -24,6 +24,6 @@ public class Torre extends Pieza{
 
     @Override
     public String toString() {
-        return getColor() ? "♖":"♜";
+        return getColor() ? "File:src/main/resources/imagenes/TorreBlanca.png":"File:src/main/resources/imagenes/TorreNegra.png";
     }
 }
