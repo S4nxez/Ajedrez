@@ -75,6 +75,8 @@ public class Juego {
             return false;
 
         int i = columna + sum; // hay un error tomo como referencia la posicion final del rey y cuando hago el enroque largo si hay una pieza en b1 lo hace igual
+        if (sum == -1 && tab.hayPieza(fila, 1))
+            return false;
         while ( i != mov.getPosFinal().getColumna()){
             i += sum;
             if  (tab.hayPieza(fila, i))
