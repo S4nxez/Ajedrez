@@ -2,7 +2,9 @@ package piezas;
 
 import Juego.Movimiento;
 import Juego.Tablero;
+import lombok.Getter;
 
+@Getter
 public class Torre extends Pieza{
     private boolean movido;
     public Torre(boolean color, String nombre) {
@@ -11,13 +13,15 @@ public class Torre extends Pieza{
     }
 
     @Override
-
     public boolean validoMovimiento(Movimiento mov, Tablero tab) {
-        return (mov.esHorizontal() || mov.esVertical());
+        if (mov.esHorizontal() || mov.esVertical())
+        {
+            movido = true;
+            return true;
+        }
+        return false;
     }
-    boolean setMovido (boolean movido){
-        return this.movido = movido;
-    }
+
     @Override
     public String toString() {
         return getColor() ? "♖":"♜";
