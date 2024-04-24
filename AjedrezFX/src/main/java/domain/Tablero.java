@@ -1,6 +1,6 @@
-package juego;
+package domain;
 
-import piezas.*;
+import domain.piezas.*;
 
 public class Tablero {
     private Pieza[][] tablero;
@@ -94,4 +94,5 @@ public class Tablero {
     public Pieza getPieza(Posicion pos){
         return tablero[pos.getFila()][pos.getColumna()];
     }
+
 }

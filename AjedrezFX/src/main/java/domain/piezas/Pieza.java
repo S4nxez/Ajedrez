@@ -1,7 +1,7 @@
-package piezas;
+package domain.piezas;
 
-import juego.Movimiento;
-import juego.Tablero;
+import domain.Movimiento;
+import domain.Tablero;
 
 public abstract class Pieza {
     private final boolean color;

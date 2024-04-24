@@ -3,7 +3,7 @@ module javafx.juego {
     requires javafx.graphics;
     requires javafx.fxml;
     requires javafx.controls;
-    exports juego;
+    exports domain;
     opens ui to javafx.graphics, javafx.fxml;
     exports ui;
 }

@@ -1,7 +1,7 @@
-package piezas;
+package domain.piezas;
 
-import juego.Movimiento;
-import juego.Tablero;
+import domain.Movimiento;
+import domain.Tablero;
 
 public class Caballo extends Pieza{
     public Caballo(boolean color, String nombre) {

@@ -9,12 +9,20 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/tablero.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Daniel's Chess");
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage stage){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/menuInicial.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            // Obtener el controlador y establecer el Stage
+            MenuInicialController controller = fxmlLoader.getController();
+            controller.setStage(stage);
+
+            stage.setScene(scene);
+            stage.setTitle("Daniel's Chess");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
