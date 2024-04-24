@@ -1,0 +1,23 @@
+.root {
+    -fx-background-color: #361b00; /* Fondo de pantalla marrón */
+}
+
+.green-button {
+    -fx-background-color: #4CAF50; /* Verde */
+    -fx-text-fill: white; /* Texto blanco */
+    -fx-border-color: transparent; /* Borde transparente */
+    -fx-font-size: 14px; /* Tamaño de la fuente */
+    -fx-font-weight: bold; /* Fuente en negrita */
+    -fx-padding: 10px 20px; /* Relleno interno */
+    -fx-cursor: hand; /* Cursor de mano */
+    -fx-background-radius: 5px; /* Borde redondeado */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); /* Efecto de sombra */
+}
+
+.green-button:hover {
+    -fx-background-color: #66BB6A; /* Verde más claro al pasar el ratón */
+}
+
+.green-button:pressed {
+    -fx-background-color: #388E3C; /* Verde más oscuro al presionar */
+}

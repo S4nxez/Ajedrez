@@ -1,8 +1,8 @@
-package juego;
+package domain;
 
-import piezas.Pieza;
-import piezas.Rey;
-import piezas.Torre;
+import domain.piezas.Pieza;
+import domain.piezas.Rey;
+import domain.piezas.Torre;
 
 
 public class Juego {
@@ -16,7 +16,6 @@ public class Juego {
     }
 
     public Movimiento jugada(String jugada, Tablero tablero) {
-
         Posicion psIni = new Posicion(( (jugada.charAt(0) - '0')), (jugada.charAt(1) - '0'));
         if (tablero.getPieza(psIni) == null || tablero.getPieza(psIni).getColor() != elTurno)
             return null;
@@ -26,6 +25,7 @@ public class Juego {
             return null;
         return new Movimiento(psIni, psFin);
     }
+
     public boolean ejecutarJugada(Movimiento movimiento, Tablero tablero){
         Posicion psIni = movimiento.getPosInicial(),
                  psFin = movimiento.getPosFinal();
@@ -54,6 +54,7 @@ public class Juego {
         } else
             return false;
     }
+
     public boolean validoEnroque(Movimiento mov, Tablero tab) {
         int     fila = mov.getPosInicial().getFila();
         int     columna = mov.getPosInicial().getColumna();
@@ -87,6 +88,7 @@ public class Juego {
         tab.ponPieza(rey, fila, i);
         return !jaque(tab, new Posicion(fila, i));
     }
+
     private void ejecutoEnroque(Tablero tablero, Movimiento movimiento) {
         int     psIniFila = movimiento.getPosInicial().getFila();
         Pieza   rey = tablero.getPieza(psIniFila, 4);
@@ -121,7 +123,8 @@ public class Juego {
     public boolean jaque(Tablero tablero, Posicion posRey) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (tablero.getPieza(i, j) != null && tablero.getPieza(i, j).getColor() != tablero.getPieza(posRey).getColor() &&
+                Pieza pieza = tablero.getPieza(i, j);
+                if (pieza != null && pieza.getColor() != tablero.getPieza(posRey).getColor() &&
                         tablero.getPieza(i, j).validoMovimiento(new Movimiento(new Posicion(i, j), posRey), tablero) &&
                         !tablero.hayPiezasEntre(new Movimiento(new Posicion(i, j), posRey)))
                     return true;
@@ -131,6 +134,9 @@ public class Juego {
     }
 
     public boolean jaqueMate(Tablero tablero, Posicion posRey) {
+        /*
+        //este metodo pasa a jaque las coordenadas del rey si estuviese en las posiciones que le rodean,
+        //pero el metodo jaque usa directamente la posición del rey para ver su color y esto provoca un null pointer
         int nuevaFila, nuevaColumna;
 
         if (!jaque(tablero, posRey))
@@ -140,13 +146,13 @@ public class Juego {
                 nuevaFila = posRey.getFila() + i;
                 nuevaColumna = posRey.getColumna() + j;
 
-                if (posValida(nuevaFila, nuevaColumna) && tablero.hayPieza(nuevaFila, nuevaColumna))
+                if (posValida(nuevaFila, nuevaColumna) && !tablero.hayPieza(nuevaFila, nuevaColumna))
                     if (!jaque(tablero, new Posicion(nuevaFila, nuevaColumna)) && tablero.getPieza(nuevaFila, nuevaColumna) == null ||
                             tablero.getPieza(nuevaFila, nuevaColumna).getColor() != tablero.getPieza(posRey).getColor())
                         return false;
             }
-        }
-        return true;
+        }*/
+        return false;
     }
 
     private boolean posValida(int fila, int columna){

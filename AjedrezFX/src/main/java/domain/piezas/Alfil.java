@@ -1,7 +1,7 @@
-package piezas;
+package domain.piezas;
 
-import juego.Movimiento;
-import juego.Tablero;
+import domain.Movimiento;
+import domain.Tablero;
 
 public class Alfil extends Pieza{
     public Alfil(boolean color, String nombre) {
