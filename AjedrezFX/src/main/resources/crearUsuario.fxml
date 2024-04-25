@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.CrearUsuarioController">
+    <Label layoutX="96.0" layoutY="100.0" text="Nombre de usuario" textFill="WHITE" />
+    <TextField fx:id="usernameField" layoutX="216.0" layoutY="96.0" />
+    <Label layoutX="140.0" layoutY="144.0" text="Contraseña" textFill="WHITE" />
+    <PasswordField fx:id="pwdField" layoutX="216.0" layoutY="140.0" />
+    <Button layoutX="252.0" layoutY="250.0" mnemonicParsing="false" onMouseClicked="#crearClicked" styleClass="green-button" text="Crear" />
+    <Label layoutX="192.0" layoutY="323.0" text="¿Ya tienes una cuenta?" textFill="WHITE" />
+    <Label layoutX="324.0" layoutY="323.0" onMouseClicked="#logInClicked" text="Iniciar sesión" textFill="BLUE" underline="true" />
+    <Label fx:id="labelError" layoutX="200.0" layoutY="241.0" textFill="RED" />
+   <PasswordField fx:id="pwdFieldRepeat" layoutX="216.0" layoutY="183.0" />
+   <Label layoutX="100.0" layoutY="187.0" text="Repetir contraseña" textFill="WHITE" />
+   <Label fx:id="labelErrorRepetir" layoutX="379.0" layoutY="187.0" textFill="RED" />
+</AnchorPane>

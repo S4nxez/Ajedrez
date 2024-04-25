@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,11 +21,8 @@ public class MenuInicialController implements Initializable{
     @FXML
     private Button datosButton;
 
+    @Setter
     private Stage stage;
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

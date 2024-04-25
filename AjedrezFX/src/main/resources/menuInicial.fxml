@@ -4,14 +4,6 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MenuInicialController">
-    <GridPane alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
-        <columnConstraints>
-            <ColumnConstraints />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints />
-        </rowConstraints>
-    </GridPane>
     <Button fx:id="jugarButton" layoutX="263.0" layoutY="157.0" onMouseClicked="#jugarClicked" prefWidth="100" styleClass="green-button" text="Jugar" />
     <Button fx:id="datosButton" layoutX="263.0" layoutY="214.0" onMouseClicked="#menuDatosClicked" prefWidth="100" styleClass="green-button" text="Menú" />
 </AnchorPane>
