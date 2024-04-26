@@ -62,7 +62,12 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
 
     @Override
     public boolean guardar(Usuario usuario) {
-        return usuarios.add(usuario);
+        boolean ret = usuarios.add(usuario);
+
+        if (ret)
+            guardarUsuarios();
+
+        return ret;
     }
 
     @Override
@@ -82,12 +87,30 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
 
     @Override
     public boolean logIn(String user, String pwd) {
+        cargarUsuarios();
+
         for(Usuario usuario : usuarios){
             if(usuario.getNombreUsuario().equals(user) && usuario.getContrasenya().equals(pwd)){
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public void guardarUsuarios() {
+        try (PrintWriter pw = new PrintWriter(new File(FICHERO))) {
+            for (Usuario usuario : usuarios) {
+                pw.println(usuario);
+            }
+        } catch (FileNotFoundException ex) {
+            java.util.logging.Logger.getLogger(UsuarioDAO.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    @Override
+    public void cargarUsuarios() {
+        usuarios = leerDiccionarioUsuarios(FICHERO);
     }
 
 }

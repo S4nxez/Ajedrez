@@ -40,6 +40,6 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return id + ":" + isAdmin + ":" + nombreUsuario + ":" + contrasenya + "\n";
+        return id + ":" + isAdmin + ":" + nombreUsuario + ":" + contrasenya;
     }
 }

@@ -1,16 +1,11 @@
 package service;
 
-import dao.IPartidaDAO;
-import dao.IUsuarioDAO;
 import domain.Juego;
 import domain.Usuario;
 
 import java.util.List;
 
 public interface IJuegoService {
-
-
-    void guardarUsuario(Usuario usuario);
 
     Usuario buscarUsuarioPorId(int id);
 
@@ -25,4 +20,8 @@ public interface IJuegoService {
     boolean logIn(String user, String pwd);
 
     boolean createUser(String text, String text1);
+
+    void guardarUsuarios();
+
+    void cargarUsuarios();
 }

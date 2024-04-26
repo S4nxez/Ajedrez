@@ -8,4 +8,6 @@ public interface IUsuarioDAO<T> {
     void eliminar(T objeto);
     Usuario buscarPorId(int id);
     boolean logIn(String user, String pwd);
+    void guardarUsuarios();
+    void cargarUsuarios();
 }
