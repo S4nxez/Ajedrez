@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MenuAdminController">
+    <children>
+        <Button fx:id="botonDelete" layoutX="259.0" layoutY="90.0" mnemonicParsing="false" styleClass="green-button" text="Eliminar" />
+        <Button fx:id="botonAdd" layoutX="46.0" layoutY="90.0" mnemonicParsing="false" styleClass="green-button" text="Añadir" />
+        <Button fx:id="botonUpdate" layoutX="141.0" layoutY="90.0" mnemonicParsing="false" styleClass="green-button" text="Actualizar" />
+        <TextField fx:id="id" alignment="CENTER" layoutX="383.0" layoutY="106.0" prefHeight="25.0" prefWidth="200.0" promptText="id" />
+        <TextField fx:id="nombre" alignment="CENTER" layoutX="383.0" layoutY="171.0" prefHeight="25.0" prefWidth="200.0" promptText="Nombre" />
+        <TextField fx:id="contrasenya" alignment="CENTER" layoutX="383.0" layoutY="236.0" prefHeight="25.0" prefWidth="200.0" promptText="Contraseña" />
+        <TableView fx:id="tablaUsuarios" layoutX="24.0" layoutY="177.0" prefHeight="209.0" prefWidth="320.0">
+            <columns>
+                <TableColumn fx:id="columna1" prefWidth="40" text="id" />
+                <TableColumn fx:id="columna2" prefWidth="100" text="Nombre" />
+                <TableColumn fx:id="columna3" prefWidth="100" text="Contraseña" />
+                <TableColumn fx:id="columna4" prefWidth="80" text="isAdmin" />
+            </columns>
+        </TableView>
+        <ComboBox fx:id="comboBox" layoutX="383.0" layoutY="304.0" prefHeight="60.0" prefWidth="200.0" promptText="Administrador" />
+    </children>
+
+</AnchorPane>

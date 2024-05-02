@@ -33,6 +33,13 @@ public class Usuario {
         this.contrasenya = trozos[3];
     }
 
+    public boolean getIsAdmin() {// lo escribo aunque tenga lombok porque sino PropertyValueFactory fallaba
+        return isAdmin;
+    }
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hashCode(nombreUsuario);

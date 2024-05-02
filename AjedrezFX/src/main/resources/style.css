@@ -21,3 +21,18 @@
 .green-button:pressed {
     -fx-background-color: #388E3C; /* Verde más oscuro al presionar */
 }
+
+.text-field {
+    -fx-background-color: #FFFFFF; /* Color de fondo blanco */
+    -fx-border-width: 2px; /* Ancho del borde */
+    -fx-border-radius: 15px; /* Borde redondeado */
+    -fx-background-radius: 15px; /* Fondo redondeado */
+    -fx-padding: 8px; /* Relleno interno */
+    -fx-font-size: 14px; /* Tamaño de la fuente */
+    -fx-font-family: "Arial"; /* Fuente */
+    -fx-text-fill: #000000; /* Color del texto */
+    -fx-pref-width: 200px; /* Ancho preferido */
+    -fx-pref-height: 30px; /* Altura preferida */
+}
+
+

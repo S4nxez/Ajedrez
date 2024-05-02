@@ -1,5 +1,7 @@
 package ui;
 
+import dao.UsuarioDAO;
+import domain.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import lombok.Setter;
@@ -20,6 +23,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LogInController implements Initializable {
+    @FXML
+    private AnchorPane logInPane;
+    @FXML
+    private AnchorPane crearCuentaPane;
     @FXML
     private TextField usernameField;
     @FXML
@@ -44,60 +51,58 @@ public class LogInController implements Initializable {
     private Stage stage;
 
     public LogInController() {
-        this.service = new JuegoService();
+        this.service = new JuegoService(new UsuarioDAO(),null);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}
 
     @FXML
-    public void logInClicked() {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/menuInicial.fxml"));
-        Scene scene;
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        MenuInicialController controller = fxmlLoader.getController();
-        if (service.logIn(usernameField.getText(), pwdField.getText())){
-            controller.setStage(stage);
-            stage.setScene(scene);
-            stage.show();
+    public void logInClicked() throws IOException {
+        Usuario user = service.logIn(usernameField.getText(), pwdField.getText());
+        if (user != null) {
+            if (user.isAdmin()){
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/menuAdmin.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+
+                MenuAdminController controller = fxmlLoader.getController();
+                controller.setStage(stage);
+                stage.setScene(scene);
+                stage.show();
+            } else {
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/menuInicialUser.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+
+                MenuInicialController controller = fxmlLoader.getController();
+                controller.setStage(stage);
+                stage.setScene(scene);
+                stage.show();
+            }
         } else {
             labelError.setText(Constantes.LOGIN_FAIL);
         }
     }
 
     @FXML
-    public void crearClicked(MouseEvent mouseEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/crearUsuario.fxml"));
+    public void crearClicked(MouseEvent mouseEvent) {
+        logInPane.setVisible(false);
+        crearCuentaPane.setVisible(true);
+    }
+
+    @FXML
+    public void signUpcrearClicked(MouseEvent mouseEvent){
+            logInPane.setVisible(true);
+            crearCuentaPane.setVisible(false);
+    }
+
+    public void signUpLogIn(MouseEvent mouseEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/logIn.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        LogInController controller = fxmlLoader.getController(); //esto no lo entiendo
+        LogInController controller = fxmlLoader.getController();
         controller.setStage(stage);
 
         stage.setScene(scene);
         stage.show();
-    }
-
-    @FXML
-    public void signUpcrearClicked(MouseEvent mouseEvent) throws IOException {
-        if (signUpPwdField.getText().equals(pwdFieldRepeat.getText())){
-            if (service.createUser(signUpUsernameField.getText(), signUpPwdField.getText())){
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/logIn.fxml"));
-                Scene scene = new Scene(fxmlLoader.load());
-
-                LogInController controller = fxmlLoader.getController();// no entiendo esto
-                controller.setStage(stage);
-
-                stage.setScene(scene);
-                stage.show();
-            }else {
-                signUpLabelError.setText(Constantes.USUARIO_YA_EXISTE);
-            }
-        } else {
-            labelErrorRepetir.setText(Constantes.CONTRASENYAS_NO_COINCIDEN);
-        }
     }
 }

@@ -1,12 +1,12 @@
 package dao;
 
-import domain.Juego;
+import domain.Partida;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PartidaDAO implements IPartidaDAO<Juego> {
-    private final List<Juego> partidas;
+public class PartidaDAO implements IPartidaDAO<Partida> {
+    private final List<Partida> partidas;
 
     public PartidaDAO() {
         // Inicializar la lista de partidas
@@ -14,18 +14,18 @@ public class PartidaDAO implements IPartidaDAO<Juego> {
     }
 
     @Override
-    public void guardar(Juego partida) {
+    public void guardar(Partida partida) {
         // Agregar la partida a la lista
         partidas.add(partida);
     }
 
     @Override
-    public void actualizar(Juego partida) {
+    public void actualizar(Partida partida) {
         // Implementar lógica para actualizar una partida en la base de datos (si es necesario)
     }
 
     @Override
-    public void eliminar(Juego partida) {
+    public void eliminar(Partida partida) {
         // Implementar lógica para eliminar una partida de la base de datos (si es necesario)
         partidas.remove(partida);
     }
@@ -42,7 +42,7 @@ public class PartidaDAO implements IPartidaDAO<Juego> {
     }*/
 
     @Override
-    public List<Juego> obtenerTodos() {
+    public List<Partida> obtenerTodos() {
         // Devolver todas las partidas
         return partidas;
     }

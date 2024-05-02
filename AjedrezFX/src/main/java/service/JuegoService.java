@@ -4,18 +4,19 @@ import dao.IPartidaDAO;
 import dao.IUsuarioDAO;
 import dao.PartidaDAO;
 import dao.UsuarioDAO;
-import domain.Juego;
+import domain.Partida;
 import domain.Usuario;
 
 import java.util.List;
+import java.util.Set;
 
 public class JuegoService implements IJuegoService {
     private final IUsuarioDAO usuarioDAO;
     private final IPartidaDAO partidaDAO;
 
-    public JuegoService() {
-        this.usuarioDAO = new UsuarioDAO();
-        this.partidaDAO = new PartidaDAO();
+    public JuegoService(UsuarioDAO usuarioDAO, PartidaDAO partidaDAO) {
+        this.usuarioDAO = usuarioDAO;
+        this.partidaDAO = partidaDAO;
     }
 
     @Override
@@ -24,27 +25,27 @@ public class JuegoService implements IJuegoService {
     }
 
     @Override
-    public List<Usuario> obtenerTodosLosUsuarios() {
-        return null;//usuarioDAO.obtenerTodos();
+    public Set<Usuario> getUsuarios() {
+        return usuarioDAO.getUsuarios();
     }
 
     @Override
-    public void guardarPartida(Juego partida) {
+    public void guardarPartida(Partida partida) {
         partidaDAO.guardar(partida);
     }
 
     @Override
-    public Juego buscarPartidaPorId(int id) {
+    public Partida buscarPartidaPorId(int id) {
         return null;//partidaDAO.buscarPorId(id);
     }
 
     @Override
-    public List<Juego> obtenerTodasLasPartidas() {
+    public List<Partida> obtenerTodasLasPartidas() {
         return partidaDAO.obtenerTodos();
     }
 
     @Override
-    public boolean logIn(String user, String pwd) {
+    public Usuario logIn(String user, String pwd) {
         return usuarioDAO.logIn(user, pwd);
     }
 

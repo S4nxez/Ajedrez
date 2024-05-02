@@ -1,15 +1,15 @@
 package dao;
 
-import domain.Juego;
+import domain.Partida;
 
 import java.util.List;
 
 public interface IPartidaDAO<T> {
-    void guardar(Juego partida);
+    void guardar(Partida partida);
 
-    void actualizar(Juego partida);
+    void actualizar(Partida partida);
 
-    void eliminar(Juego partida);
+    void eliminar(Partida partida);
 
-    List<Juego> obtenerTodos();
+    List<Partida> obtenerTodos();
 }

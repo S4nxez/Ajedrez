@@ -1,6 +1,7 @@
 package dao;
 
 import domain.Usuario;
+import lombok.Getter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,12 +11,14 @@ import java.util.*;
 
 public class UsuarioDAO implements IUsuarioDAO<Usuario> {
 
+    @Getter
     private Set<Usuario> usuarios;
     public static final String FICHERO = "Usuarios";
 
     public UsuarioDAO(){
         usuarios = leerDiccionarioUsuarios(FICHERO);
     }
+
     private void crearFichero() {
         File fichero1 = new File(FICHERO);
         if (!fichero1.exists()) {
@@ -86,15 +89,15 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
     }
 
     @Override
-    public boolean logIn(String user, String pwd) {
+    public Usuario logIn(String user, String pwd) {
         cargarUsuarios();
 
         for(Usuario usuario : usuarios){
             if(usuario.getNombreUsuario().equals(user) && usuario.getContrasenya().equals(pwd)){
-                return true;
+                return usuario;
             }
         }
-        return false;
+        return null;
     }
 
     @Override

@@ -1,23 +1,24 @@
 package service;
 
-import domain.Juego;
+import domain.Partida;
 import domain.Usuario;
 
 import java.util.List;
+import java.util.Set;
 
 public interface IJuegoService {
 
     Usuario buscarUsuarioPorId(int id);
 
-    List<Usuario> obtenerTodosLosUsuarios();
+    Set<Usuario> getUsuarios();
 
-    void guardarPartida(Juego partida);
+    void guardarPartida(Partida partida);
 
-    Juego buscarPartidaPorId(int id);
+    Partida buscarPartidaPorId(int id);
 
-    List<Juego> obtenerTodasLasPartidas();
+    List<Partida> obtenerTodasLasPartidas();
 
-    boolean logIn(String user, String pwd);
+    Usuario logIn(String user, String pwd);
 
     boolean createUser(String text, String text1);
 

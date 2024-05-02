@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import domain.Juego;
+import domain.Partida;
 import domain.Movimiento;
 import domain.Tablero;
 
@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TableroController implements Initializable {
-    Juego juego = new Juego();
+    Partida juego = new Partida();
     Tablero tablero = new Tablero();
     String[] movimiento = new String[2];
     @FXML
