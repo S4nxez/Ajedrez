@@ -50,8 +50,8 @@ public class JuegoService implements IJuegoService {
     }
 
     @Override
-    public boolean createUser(String usuario, String pwd) {
-        return usuarioDAO.guardar(new Usuario(3, false, usuario, pwd));
+    public boolean addUser(String usuario, String pwd, boolean admin) {
+        return usuarioDAO.guardar(new Usuario(3, admin, usuario, pwd));
     }
 
     @Override
@@ -62,6 +62,21 @@ public class JuegoService implements IJuegoService {
     @Override
     public void cargarUsuarios() {
         usuarioDAO.cargarUsuarios();
+    }
+
+    @Override
+    public boolean addUsuario(Usuario usuario) {
+        return usuarioDAO.guardar(usuario);
+    }
+
+    @Override
+    public boolean deleteUsuario(Usuario usuario) {
+        return usuarioDAO.delete(usuario);
+    }
+
+    @Override
+    public boolean updateUsuario(Usuario user1, Usuario user2) {
+        return usuarioDAO.update(user1, user2);
     }
 
 }

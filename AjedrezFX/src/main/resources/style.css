@@ -35,4 +35,40 @@
     -fx-pref-height: 30px; /* Altura preferida */
 }
 
+.grey-button {
+    -fx-background-color: #7e7e7e; /* Verde */
+    -fx-text-fill: #ffffff; /* Texto blanco */
+    -fx-border-color: transparent; /* Borde transparente */
+    -fx-font-size: 12px; /* Tamaño de la fuente */
+    -fx-font-weight: bold; /* Fuente en negrita */
+    -fx-padding: 8px 10px; /* Relleno interno */
+    -fx-cursor: hand; /* Cursor de mano */
+    -fx-background-radius: 3px; /* Borde redondeado */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); /* Efecto de sombra */
+}
+
+.mfx-combo-box {
+    -fx-background-color: white; /* Color de fondo */
+    -fx-border-color: #bcbcbc; /* Color del borde */
+    -fx-border-width: 1px; /* Ancho del borde */
+    -fx-border-radius: 3px; /* Borde redondeado */
+    -fx-padding: 5px; /* Relleno interno */
+    -fx-font-size: 14px; /* Tamaño de la fuente */
+    -fx-pref-width: 150px; /* Ancho */
+    -fx-min-height: 25px;
+}
+
+.mfx-combo-box .arrow-button {
+    -fx-background-color: #f0f0f0; /* Color del botón de flecha */
+    -fx-background-radius: 0px 3px 3px 0px; /* Borde redondeado para la flecha */
+}
+
+.mfx-combo-box:hover .arrow-button {
+    -fx-background-color: #e0e0e0; /* Cambio de color al pasar el ratón */
+}
+
+.mfx-combo-box .list-cell {
+    -fx-background-color: white; /* Color de fondo de los elementos de la lista */
+    -fx-font-size: 14px; /* Tamaño de la fuente de los elementos de la lista */
+}
 

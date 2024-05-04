@@ -14,4 +14,6 @@ public interface IUsuarioDAO<T> {
     Usuario logIn(String user, String pwd);
     void guardarUsuarios();
     void cargarUsuarios();
+    boolean delete(Usuario usuario);
+    boolean update(Usuario user1, Usuario user2);
 }

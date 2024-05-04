@@ -116,4 +116,30 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
         usuarios = leerDiccionarioUsuarios(FICHERO);
     }
 
+    @Override
+    public boolean delete(Usuario usuario) {
+        boolean ret = usuarios.remove(usuario);
+        guardarUsuarios();
+        return ret;
+    }
+
+    @Override
+    public boolean update(Usuario user2, Usuario user1) {
+        boolean ret = usuarios.remove(user1);
+        if (user1.getNombreUsuario().equals(user2.getNombreUsuario()) &&
+                user1.getContrasenya().equals(user2.getContrasenya()) &&
+                user1.isAdmin() == user2.isAdmin() &&
+                user1.getId() == user2.getId()){
+            ret = false;
+        }
+        if (ret && usuarios.add(user2)) {
+            guardarUsuarios();
+        }else {
+            ret = false;
+            usuarios.add(user1);
+        }
+        return ret;
+    }
+
+
 }

@@ -91,8 +91,17 @@ public class LogInController implements Initializable {
 
     @FXML
     public void signUpcrearClicked(MouseEvent mouseEvent){
-            logInPane.setVisible(true);
-            crearCuentaPane.setVisible(false);
+        if (signUpPwdField.getText().equals(pwdFieldRepeat.getText())){
+            if (service.addUser(signUpUsernameField.getText(), signUpPwdField.getText(), false)){
+                logInPane.setVisible(true);
+                crearCuentaPane.setVisible(false);
+            }else {
+                signUpLabelError.setText(Constantes.USUARIO_YA_EXISTE);
+            }
+        } else {
+            labelErrorRepetir.setText(Constantes.CONTRASENYAS_NO_COINCIDEN);
+        }
+
     }
 
     public void signUpLogIn(MouseEvent mouseEvent) throws IOException {

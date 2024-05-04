@@ -20,9 +20,15 @@ public interface IJuegoService {
 
     Usuario logIn(String user, String pwd);
 
-    boolean createUser(String text, String text1);
+    boolean addUser(String nombre, String contrasenya, boolean admin);
 
     void guardarUsuarios();
 
     void cargarUsuarios();
+
+    boolean addUsuario(Usuario usuario);
+
+    boolean deleteUsuario(Usuario usuario);
+
+    boolean updateUsuario(Usuario user1, Usuario user2);
 }
