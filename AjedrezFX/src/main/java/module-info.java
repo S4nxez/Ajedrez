@@ -4,6 +4,7 @@ module javafx.juego {
     requires javafx.fxml;
     requires javafx.controls;
     requires java.logging;
+    requires MaterialFX;
     exports domain;
     opens ui to javafx.graphics, javafx.fxml;
     exports ui;

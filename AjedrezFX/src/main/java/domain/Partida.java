@@ -5,7 +5,7 @@ import domain.piezas.Rey;
 import domain.piezas.Torre;
 
 
-public class Juego {
+public class Partida {
     private boolean elTurno = true; // 0->Negras 1->Blancas
     public boolean getTurno() {
         return elTurno;

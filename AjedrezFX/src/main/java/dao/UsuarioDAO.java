@@ -1,6 +1,7 @@
 package dao;
 
 import domain.Usuario;
+import lombok.Getter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,12 +11,14 @@ import java.util.*;
 
 public class UsuarioDAO implements IUsuarioDAO<Usuario> {
 
+    @Getter
     private Set<Usuario> usuarios;
     public static final String FICHERO = "Usuarios";
 
     public UsuarioDAO(){
         usuarios = leerDiccionarioUsuarios(FICHERO);
     }
+
     private void crearFichero() {
         File fichero1 = new File(FICHERO);
         if (!fichero1.exists()) {
@@ -86,15 +89,15 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
     }
 
     @Override
-    public boolean logIn(String user, String pwd) {
+    public Usuario logIn(String user, String pwd) {
         cargarUsuarios();
 
         for(Usuario usuario : usuarios){
             if(usuario.getNombreUsuario().equals(user) && usuario.getContrasenya().equals(pwd)){
-                return true;
+                return usuario;
             }
         }
-        return false;
+        return null;
     }
 
     @Override
@@ -112,5 +115,31 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
     public void cargarUsuarios() {
         usuarios = leerDiccionarioUsuarios(FICHERO);
     }
+
+    @Override
+    public boolean delete(Usuario usuario) {
+        boolean ret = usuarios.remove(usuario);
+        guardarUsuarios();
+        return ret;
+    }
+
+    @Override
+    public boolean update(Usuario user2, Usuario user1) {
+        boolean ret = usuarios.remove(user1);
+        if (user1.getNombreUsuario().equals(user2.getNombreUsuario()) &&
+                user1.getContrasenya().equals(user2.getContrasenya()) &&
+                user1.isAdmin() == user2.isAdmin() &&
+                user1.getId() == user2.getId()){
+            ret = false;
+        }
+        if (ret && usuarios.add(user2)) {
+            guardarUsuarios();
+        }else {
+            ret = false;
+            usuarios.add(user1);
+        }
+        return ret;
+    }
+
 
 }

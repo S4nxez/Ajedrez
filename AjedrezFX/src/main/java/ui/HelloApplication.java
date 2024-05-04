@@ -18,6 +18,7 @@ public class HelloApplication extends Application {
 
             stage.setScene(scene);
             stage.setTitle("Ajedrez de Dani");
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

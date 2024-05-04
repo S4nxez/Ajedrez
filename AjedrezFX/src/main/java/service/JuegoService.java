@@ -4,18 +4,19 @@ import dao.IPartidaDAO;
 import dao.IUsuarioDAO;
 import dao.PartidaDAO;
 import dao.UsuarioDAO;
-import domain.Juego;
+import domain.Partida;
 import domain.Usuario;
 
 import java.util.List;
+import java.util.Set;
 
 public class JuegoService implements IJuegoService {
     private final IUsuarioDAO usuarioDAO;
     private final IPartidaDAO partidaDAO;
 
-    public JuegoService() {
-        this.usuarioDAO = new UsuarioDAO();
-        this.partidaDAO = new PartidaDAO();
+    public JuegoService(UsuarioDAO usuarioDAO, PartidaDAO partidaDAO) {
+        this.usuarioDAO = usuarioDAO;
+        this.partidaDAO = partidaDAO;
     }
 
     @Override
@@ -24,33 +25,33 @@ public class JuegoService implements IJuegoService {
     }
 
     @Override
-    public List<Usuario> obtenerTodosLosUsuarios() {
-        return null;//usuarioDAO.obtenerTodos();
+    public Set<Usuario> getUsuarios() {
+        return usuarioDAO.getUsuarios();
     }
 
     @Override
-    public void guardarPartida(Juego partida) {
+    public void guardarPartida(Partida partida) {
         partidaDAO.guardar(partida);
     }
 
     @Override
-    public Juego buscarPartidaPorId(int id) {
+    public Partida buscarPartidaPorId(int id) {
         return null;//partidaDAO.buscarPorId(id);
     }
 
     @Override
-    public List<Juego> obtenerTodasLasPartidas() {
+    public List<Partida> obtenerTodasLasPartidas() {
         return partidaDAO.obtenerTodos();
     }
 
     @Override
-    public boolean logIn(String user, String pwd) {
+    public Usuario logIn(String user, String pwd) {
         return usuarioDAO.logIn(user, pwd);
     }
 
     @Override
-    public boolean createUser(String usuario, String pwd) {
-        return usuarioDAO.guardar(new Usuario(3, false, usuario, pwd));
+    public boolean addUser(String usuario, String pwd, boolean admin) {
+        return usuarioDAO.guardar(new Usuario(3, admin, usuario, pwd));
     }
 
     @Override
@@ -61,6 +62,21 @@ public class JuegoService implements IJuegoService {
     @Override
     public void cargarUsuarios() {
         usuarioDAO.cargarUsuarios();
+    }
+
+    @Override
+    public boolean addUsuario(Usuario usuario) {
+        return usuarioDAO.guardar(usuario);
+    }
+
+    @Override
+    public boolean deleteUsuario(Usuario usuario) {
+        return usuarioDAO.delete(usuario);
+    }
+
+    @Override
+    public boolean updateUsuario(Usuario user1, Usuario user2) {
+        return usuarioDAO.update(user1, user2);
     }
 
 }
