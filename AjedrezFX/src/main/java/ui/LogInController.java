@@ -65,8 +65,6 @@ public class LogInController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/menuAdmin.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
 
-                MenuAdminController controller = fxmlLoader.getController();
-                controller.setStage(stage);
                 stage.setScene(scene);
                 stage.show();
             } else {

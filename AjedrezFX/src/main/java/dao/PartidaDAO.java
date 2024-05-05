@@ -2,21 +2,64 @@ package dao;
 
 import domain.Partida;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PartidaDAO implements IPartidaDAO<Partida> {
     private final List<Partida> partidas;
+    private static final String FICHEROB = "binarioPartidas";
+
 
     public PartidaDAO() {
         // Inicializar la lista de partidas
-        this.partidas = new ArrayList<>();
+        this.partidas = leerFicheroBinario();
+    }
+
+    @Override
+    public void crearFicheros() throws IOException {
+        File fichero = new File(FICHEROB);
+        if (!fichero.exists())
+            fichero.createNewFile();
+    }
+
+    @Override
+    public List<Partida> leerFicheroBinario() {
+        List<Partida> ret = new ArrayList<>();
+        File file = new File(FICHEROB);
+
+        if (file.exists() && file.length() != 0) {
+            try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(file))) {
+                Object obj = is.readObject();
+                if (obj instanceof List)
+                    ret = (List<Partida>) obj;
+                else
+                    ret = new ArrayList<>();
+
+            } catch (IOException | ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(PartidaDAO.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
+            }
+        }
+        return ret;
+    }
+
+    @Override
+    public boolean escribirFicheroBinario() {
+        boolean escrito = false;
+        try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(FICHEROB))) {
+            os.writeObject(this.partidas);
+            escrito = true;
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(PartidaDAO.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
+        }
+        return escrito;
     }
 
     @Override
     public void guardar(Partida partida) {
         // Agregar la partida a la lista
         partidas.add(partida);
+        escribirFicheroBinario();
     }
 
     @Override
@@ -43,7 +86,6 @@ public class PartidaDAO implements IPartidaDAO<Partida> {
 
     @Override
     public List<Partida> obtenerTodos() {
-        // Devolver todas las partidas
         return partidas;
     }
 }

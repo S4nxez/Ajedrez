@@ -1,5 +1,8 @@
 package ui;
 
+import dao.PartidaDAO;
+import dao.UsuarioDAO;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -11,14 +14,16 @@ import javafx.scene.layout.Pane;
 import domain.Partida;
 import domain.Movimiento;
 import domain.Tablero;
+import service.JuegoService;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TableroController implements Initializable {
-    Partida juego = new Partida();
-    Tablero tablero = new Tablero();
     String[] movimiento = new String[2];
+    Partida  juego = new Partida();
+    Tablero  tablero = new Tablero();
+    MainViewModel servicio = new MainViewModel(new JuegoService(new UsuarioDAO(), new PartidaDAO()));
     @FXML
     private Label label;
     @FXML
@@ -89,4 +94,8 @@ public class TableroController implements Initializable {
         }
     }
 
+    @FXML
+    public void guardarPartida() {
+        servicio.getServicio().guardarPartida(juego);
+    }
 }

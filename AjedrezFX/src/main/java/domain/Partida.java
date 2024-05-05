@@ -3,10 +3,21 @@ package domain;
 import domain.piezas.Pieza;
 import domain.piezas.Rey;
 import domain.piezas.Torre;
+import lombok.Getter;
+
+import java.io.Serializable;
+import java.time.LocalDate;
 
 
-public class Partida {
+public class Partida implements Serializable {
     private boolean elTurno = true; // 0->Negras 1->Blancas
+    @Getter
+    private LocalDate fecha;
+
+    public Partida() {
+        this.fecha = LocalDate.now();
+    }
+
     public boolean getTurno() {
         return elTurno;
     }

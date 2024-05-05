@@ -1,13 +1,20 @@
 package ui;
 
+import dao.PartidaDAO;
+import dao.UsuarioDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lombok.Setter;
+import service.JuegoService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,12 +24,27 @@ import java.util.ResourceBundle;
 public class MenuInicialController implements Initializable{
 
     @FXML
+    public AnchorPane initialPane;
+    @FXML
+    public AnchorPane partidasPane;
+    @FXML
+    public TableView tablaPartidas;
+    @FXML
+    public TableColumn columnaNombre;
+    @FXML
+    public TableColumn columnaFecha;
+    @FXML
     private Button jugarButton;
     @FXML
     private Button datosButton;
 
     @Setter
     private Stage stage;
+    private final MainViewModel viewModel;
+
+    public MenuInicialController() {
+        viewModel = new MainViewModel(new JuegoService(new UsuarioDAO(), new PartidaDAO()));
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -38,6 +60,16 @@ public class MenuInicialController implements Initializable{
 
     @FXML
     private void menuDatosClicked(MouseEvent event) {
-        System.out.println("Otro menu");
+        initialPane.setVisible(false);
+        partidasPane.setVisible(true);
+
+        tablaPartidas.setItems(viewModel.getPartidas());
+        columnaFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+    }
+
+    @FXML
+    private void volverClicked(MouseEvent event) {
+        partidasPane.setVisible(false);
+        initialPane.setVisible(true);
     }
 }
