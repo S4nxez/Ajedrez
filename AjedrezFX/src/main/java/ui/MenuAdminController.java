@@ -4,16 +4,14 @@ import dao.PartidaDAO;
 import dao.UsuarioDAO;
 import domain.Usuario;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import lombok.Setter;
 import service.JuegoService;
 import javafx.scene.control.*;
@@ -25,7 +23,6 @@ import java.util.ResourceBundle;
 @Setter
 public class MenuAdminController implements Initializable {
 
-    private Stage stage;
 
     private final MainViewModel viewModel;
     @FXML
@@ -47,6 +44,8 @@ public class MenuAdminController implements Initializable {
     private TextField contrasenya;
     @FXML
     private TextField id;
+    @FXML
+    private MFXComboBox<String> selectOrder;
 
     public MenuAdminController() {
         viewModel = new MainViewModel(new JuegoService(new UsuarioDAO(), new PartidaDAO()));
@@ -61,6 +60,7 @@ public class MenuAdminController implements Initializable {
         columna3.setCellValueFactory(new PropertyValueFactory<>("contrasenya"));
         columna4.setCellValueFactory(new PropertyValueFactory<>("isAdmin"));
         comboBox.getItems().addAll("true", "false");
+        selectOrder.getItems().addAll("Id", "Nombre");
 
         tablaUsuarios.setOnMouseClicked((MouseEvent event) -> onEdit());
     }
@@ -77,7 +77,7 @@ public class MenuAdminController implements Initializable {
 
     @FXML
     private void addUsuario() {
-        if (id.getText().isEmpty() || nombre.getText().isEmpty() || contrasenya.getText().isEmpty() || comboBox.getValue().isEmpty()) {
+        if (id.getText().isEmpty() || nombre.getText().isEmpty() || contrasenya.getText().isEmpty() || comboBox.getValue().isBlank()) {
             alertaError("añadir usuario");
         }else {
             Usuario usuario = new Usuario(Integer.parseInt(id.getText()), Boolean.parseBoolean(comboBox.getValue()), nombre.getText(), contrasenya.getText());
@@ -132,5 +132,11 @@ public class MenuAdminController implements Initializable {
                 alertaError("actualizar usuario");
             }
         }
+    }
+
+    @FXML
+    public void orderBy() {
+        String orden = selectOrder.getValue();
+        tablaUsuarios.setItems(FXCollections.observableArrayList(viewModel.getServicio().orderBy(orden)));
     }
 }

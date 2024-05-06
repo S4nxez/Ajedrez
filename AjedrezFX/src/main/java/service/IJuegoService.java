@@ -2,6 +2,7 @@ package service;
 
 import domain.Partida;
 import domain.Usuario;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 import java.util.Set;
@@ -16,7 +17,7 @@ public interface IJuegoService {
 
     Partida buscarPartidaPorId(int id);
 
-    List<Partida> obtenerTodasLasPartidas();
+    Set<Partida> obtenerTodasLasPartidas();
 
     Usuario logIn(String user, String pwd);
 
@@ -31,4 +32,6 @@ public interface IJuegoService {
     boolean deleteUsuario(Usuario usuario);
 
     boolean updateUsuario(Usuario user1, Usuario user2);
+
+    Set<Usuario> orderBy(String orden);
 }

@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class UsuarioDAO implements IUsuarioDAO<Usuario> {
 
@@ -139,6 +140,18 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
             usuarios.add(user1);
         }
         return ret;
+    }
+
+    @Override
+    public Set<Usuario> orderBy(String orden) {
+        Comparator<Usuario> comparator;
+
+        if (orden.equals("Nombre")) {
+            comparator = Comparator.comparing(Usuario::getNombreUsuario);
+        } else {
+            comparator = Comparator.comparing(Usuario::getId);
+        }
+        return usuarios.stream().sorted(comparator).collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
 

@@ -1,12 +1,26 @@
 package domain;
 
+import dao.PartidaDAO;
 import domain.piezas.Pieza;
 import domain.piezas.Rey;
 import domain.piezas.Torre;
+import lombok.Getter;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 
-public class Partida {
+@Getter
+public class Partida implements Serializable {
     private boolean elTurno = true; // 0->Negras 1->Blancas
+    private LocalDate fecha;
+    private int id;
+
+    public Partida() {
+        this.fecha = LocalDate.now();
+        this.id = PartidaDAO.getAutonumerico();
+        PartidaDAO.setAutonumerico(PartidaDAO.getAutonumerico() + 1);
+    }
+
     public boolean getTurno() {
         return elTurno;
     }
