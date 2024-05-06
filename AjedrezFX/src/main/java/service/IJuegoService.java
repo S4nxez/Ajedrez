@@ -17,7 +17,7 @@ public interface IJuegoService {
 
     Partida buscarPartidaPorId(int id);
 
-    List<Partida> obtenerTodasLasPartidas();
+    Set<Partida> obtenerTodasLasPartidas();
 
     Usuario logIn(String user, String pwd);
 

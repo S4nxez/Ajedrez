@@ -5,11 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PartidaDAO implements IPartidaDAO<Partida> {
-    private final List<Partida> partidas;
+    private final Set<Partida> partidas;
     private static final String FICHEROB = "binarioPartidas";
     @Getter
     @Setter
@@ -31,17 +31,17 @@ public class PartidaDAO implements IPartidaDAO<Partida> {
     }
 
     @Override
-    public List<Partida> leerFicheroBinario() {
-        List<Partida> ret = new ArrayList<>();
+    public Set<Partida> leerFicheroBinario() {
+        Set<Partida> ret = new HashSet<>();
         File file = new File(FICHEROB);
 
         if (file.exists() && file.length() != 0) {
             try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(file))) {
                 Object obj = is.readObject();
-                if (obj instanceof List)
-                    ret = (List<Partida>) obj;
+                if (obj instanceof Set)
+                    ret = (Set<Partida>) obj;
                 else
-                    ret = new ArrayList<>();
+                    ret = new HashSet<>();
 
             } catch (IOException | ClassNotFoundException ex) {
                 java.util.logging.Logger.getLogger(PartidaDAO.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
@@ -92,7 +92,7 @@ public class PartidaDAO implements IPartidaDAO<Partida> {
     }*/
 
     @Override
-    public List<Partida> obtenerTodos() {
+    public Set<Partida> obtenerTodos() {
         return partidas;
     }
 }

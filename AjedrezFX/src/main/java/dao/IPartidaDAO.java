@@ -4,11 +4,12 @@ import domain.Partida;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 public interface IPartidaDAO<T> {
     void crearFicheros() throws IOException;
 
-    List<Partida> leerFicheroBinario();
+    Set<Partida> leerFicheroBinario();
 
     boolean escribirFicheroBinario();
 
@@ -18,6 +19,6 @@ public interface IPartidaDAO<T> {
 
     void eliminar(Partida partida);
 
-    List<Partida> obtenerTodos();
+    Set<Partida> obtenerTodos();
 
 }

@@ -41,7 +41,7 @@ public class JuegoService implements IJuegoService {
     }
 
     @Override
-    public List<Partida> obtenerTodasLasPartidas() {
+    public Set<Partida> obtenerTodasLasPartidas() {
         return partidaDAO.obtenerTodos();
     }
 
