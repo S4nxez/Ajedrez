@@ -20,6 +20,7 @@ public class PartidaDAO implements IPartidaDAO<Partida> {
     public PartidaDAO() {
         // Inicializar la lista de partidas
         this.partidas = leerFicheroBinario();
+        autonumerico = partidas.size();
     }
 
     @Override
