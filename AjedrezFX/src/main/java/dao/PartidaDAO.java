@@ -1,6 +1,8 @@
 package dao;
 
 import domain.Partida;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,6 +11,10 @@ import java.util.List;
 public class PartidaDAO implements IPartidaDAO<Partida> {
     private final List<Partida> partidas;
     private static final String FICHEROB = "binarioPartidas";
+    @Getter
+    @Setter
+    private static int autonumerico;
+
 
 
     public PartidaDAO() {

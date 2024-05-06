@@ -1,7 +1,6 @@
 package dao;
 
 import domain.Usuario;
-import javafx.collections.ObservableList;
 import lombok.Getter;
 
 import java.io.File;

@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
 import service.IJuegoService;
 import common.*;
 import service.JuegoService;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@Log4j2
 public class LogInController implements Initializable {
     @FXML
     private AnchorPane logInPane;
@@ -62,13 +64,13 @@ public class LogInController implements Initializable {
         Usuario user = service.logIn(usernameField.getText(), pwdField.getText());
         if (user != null) {
             if (user.isAdmin()){
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/menuAdmin.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/fxml/menuAdmin.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
 
                 stage.setScene(scene);
                 stage.show();
             } else {
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/menuInicialUser.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/fxml/menuInicialUser.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
 
                 MenuInicialController controller = fxmlLoader.getController();
@@ -77,6 +79,7 @@ public class LogInController implements Initializable {
                 stage.show();
             }
         } else {
+            log.info(Constantes.LOGIN_FAIL);
             labelError.setText(Constantes.LOGIN_FAIL);
         }
     }
@@ -103,7 +106,7 @@ public class LogInController implements Initializable {
     }
 
     public void signUpLogIn(MouseEvent mouseEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/logIn.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/fxml/logIn.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         LogInController controller = fxmlLoader.getController();

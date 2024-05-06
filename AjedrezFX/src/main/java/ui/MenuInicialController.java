@@ -30,9 +30,9 @@ public class MenuInicialController implements Initializable{
     @FXML
     public TableView tablaPartidas;
     @FXML
-    public TableColumn columnaNombre;
-    @FXML
     public TableColumn columnaFecha;
+    @FXML
+    public TableColumn columnaId;
     @FXML
     private Button jugarButton;
     @FXML
@@ -52,7 +52,7 @@ public class MenuInicialController implements Initializable{
 
     @FXML
     private void jugarClicked(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/tablero.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/fxml/tablero.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.show();
@@ -65,6 +65,7 @@ public class MenuInicialController implements Initializable{
 
         tablaPartidas.setItems(viewModel.getPartidas());
         columnaFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        columnaId.setCellValueFactory(new PropertyValueFactory<>("id"));
     }
 
     @FXML
