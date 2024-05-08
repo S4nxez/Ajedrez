@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "isAdmin": true,
+    "nombreUsuario": "admin",
+    "contrasenya": "admin"
+  },
+  {
+    "id": 2,
+    "isAdmin": false,
+    "nombreUsuario": "user",
+    "contrasenya": "user"
+  }
+]

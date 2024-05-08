@@ -94,8 +94,7 @@ public class LogInController implements Initializable {
     public void signUpcrearClicked(MouseEvent mouseEvent){
         if (signUpPwdField.getText().equals(pwdFieldRepeat.getText())){
             if (service.addUser(signUpUsernameField.getText(), signUpPwdField.getText(), false)){
-                logInPane.setVisible(true);
-                crearCuentaPane.setVisible(false);
+                signUpLogIn();
             }else {
                 signUpLabelError.setText(Constantes.USUARIO_YA_EXISTE);
             }
@@ -105,14 +104,16 @@ public class LogInController implements Initializable {
 
     }
 
-    public void signUpLogIn(MouseEvent mouseEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/fxml/logIn.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-        LogInController controller = fxmlLoader.getController();
-        controller.setStage(stage);
-
-        stage.setScene(scene);
-        stage.show();
+    public void signUpLogIn() {
+        usernameField.clear();
+        pwdField.clear();
+        signUpUsernameField.clear();
+        signUpPwdField.clear();
+        pwdFieldRepeat.clear();
+        signUpLabelError.setVisible(false);
+        labelErrorRepetir.setVisible(false);
+        labelError.setVisible(false);
+        crearCuentaPane.setVisible(false);
+        logInPane.setVisible(true);
     }
 }

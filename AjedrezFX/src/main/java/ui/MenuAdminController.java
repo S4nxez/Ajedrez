@@ -37,7 +37,7 @@ public class MenuAdminController implements Initializable {
     private TableColumn<Usuario, Boolean> columna4;
 
     @FXML
-    private MFXComboBox<String> comboBox;
+    private ComboBox<String> comboBox;
     @FXML
     private TextField nombre;
     @FXML
@@ -45,7 +45,7 @@ public class MenuAdminController implements Initializable {
     @FXML
     private TextField id;
     @FXML
-    private MFXComboBox<String> selectOrder;
+    private ComboBox<String> selectOrder;
 
     public MenuAdminController() {
         viewModel = new MainViewModel(new JuegoService(new UsuarioDAO(), new PartidaDAO()));
@@ -95,7 +95,7 @@ public class MenuAdminController implements Initializable {
         id.clear();
         nombre.clear();
         contrasenya.clear();
-        comboBox.clear();
+        comboBox.setValue(null);
     }
 
     @FXML

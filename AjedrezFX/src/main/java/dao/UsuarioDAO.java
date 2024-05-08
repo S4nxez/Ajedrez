@@ -1,12 +1,12 @@
 package dao;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import domain.Usuario;
 import lombok.Getter;
+import lombok.Setter;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -14,10 +14,17 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
 
     @Getter
     private Set<Usuario> usuarios;
-    public static final String FICHERO = "Usuarios";
+    public static final String FICHERO = "Usuarios.json";
+    @Getter
+    private static int autonumerico;
 
     public UsuarioDAO(){
         usuarios = leerDiccionarioUsuarios(FICHERO);
+        autonumerico = usuarios.size();
+    }
+
+    public void setAutonumerico(int auto) {
+        autonumerico = auto;
     }
 
     private void crearFichero() {
@@ -28,32 +35,30 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            PrintWriter pw = null;
-            try {
-                pw = new PrintWriter(fichero1);
-            } catch (FileNotFoundException e) {
+            try (FileWriter writer = new FileWriter(fichero1)) {
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                List<Usuario> userList = crearDiccionarioUsuarios().stream().collect(Collectors.toList());
+                String json = gson.toJson(userList);
+                writer.write(json);
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            for(Usuario usuario :  crearDiccionarioUsuarios()){
-                pw.print(usuario);
-            }
-            pw.close();
         }
     }
 
     private Set<Usuario> leerDiccionarioUsuarios(String fichero){
-        Set<Usuario> ret = null;
+        Set<Usuario> ret = new HashSet<>();
 
         crearFichero();
-        try (Scanner sc = new Scanner(new File(fichero))) {
-            ret = new HashSet<>();
-            while (sc.hasNextLine()) {
-                String cadena = sc.nextLine();
-                ret.add(new Usuario(cadena));
-            }
-        } catch (FileNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UsuarioDAO.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex); //no entiendo
+        try {
+            Gson gson = new Gson();
+            BufferedReader br = new BufferedReader(new FileReader(fichero));
+            Usuario[] usuariosArray = gson.fromJson(br, Usuario[].class);
+            ret.addAll(Arrays.asList(usuariosArray));
+        } catch (FileNotFoundException e) {
+            java.util.logging.Logger.getLogger(UsuarioDAO.class.getName()).log(java.util.logging.Level.SEVERE, e.getMessage(), e);
         }
+
         return ret;
     }
 
@@ -67,22 +72,14 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
     @Override
     public boolean guardar(Usuario usuario) {
         boolean ret = usuarios.add(usuario);
-
-        if (ret)
+        if (ret) {
+            setAutonumerico(usuarios.size());
+            update(new Usuario(autonumerico, usuario.isAdmin() ,usuario.getNombreUsuario(), usuario.getContrasenya()), usuario);
             guardarUsuarios();
-
+        }
         return ret;
     }
 
-    @Override
-    public void actualizar(Usuario objeto) {
-
-    }
-
-    @Override
-    public void eliminar(Usuario objeto) {
-
-    }
 
     @Override
     public Usuario buscarPorId(int id) {
@@ -92,23 +89,21 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
     @Override
     public Usuario logIn(String user, String pwd) {
         cargarUsuarios();
-
-        for(Usuario usuario : usuarios){
-            if(usuario.getNombreUsuario().equals(user) && usuario.getContrasenya().equals(pwd)){
-                return usuario;
-            }
-        }
-        return null;
+        return usuarios.stream()
+                .filter(usuario -> usuario.getNombreUsuario().equals(user) && usuario.getContrasenya().equals(pwd))
+                .findFirst().orElse(null);
     }
+
 
     @Override
     public void guardarUsuarios() {
-        try (PrintWriter pw = new PrintWriter(new File(FICHERO))) {
-            for (Usuario usuario : usuarios) {
-                pw.println(usuario);
-            }
-        } catch (FileNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UsuarioDAO.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        List<Usuario> userList = new ArrayList<>(usuarios);
+        String json = gson.toJson(userList);
+        try (FileWriter writer = new FileWriter(FICHERO, false)) {
+            writer.write(json);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -153,6 +148,5 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
         }
         return usuarios.stream().sorted(comparator).collect(Collectors.toCollection(LinkedHashSet::new));
     }
-
 
 }

@@ -1,5 +1,7 @@
 package domain;
 
+import dao.PartidaDAO;
+import dao.UsuarioDAO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +18,13 @@ public class Usuario {
     private boolean isAdmin;
     private String nombreUsuario;
     private String contrasenya;
+
+    public Usuario(boolean isAdmin, String nombreUsuario, String contrasenya) {
+        this.isAdmin = isAdmin;
+        this.nombreUsuario = nombreUsuario;
+        this.contrasenya = contrasenya;
+        this.id = UsuarioDAO.getAutonumerico();
+    }
 
     @Override
     public boolean equals(Object o) {

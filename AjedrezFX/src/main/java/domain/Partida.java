@@ -18,7 +18,6 @@ public class Partida implements Serializable {
     public Partida() {
         this.fecha = LocalDate.now();
         this.id = PartidaDAO.getAutonumerico();
-        PartidaDAO.setAutonumerico(PartidaDAO.getAutonumerico() + 1);
     }
 
     public boolean getTurno() {
