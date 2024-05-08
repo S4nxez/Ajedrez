@@ -54,8 +54,6 @@
     -fx-border-radius: 3px; /* Borde redondeado */
     -fx-padding: 5px; /* Relleno interno */
     -fx-font-size: 14px; /* Tamaño de la fuente */
-    -fx-pref-width: 150px; /* Ancho */
-    -fx-min-height: 25px;
 }
 
 .mfx-combo-box .arrow-button {

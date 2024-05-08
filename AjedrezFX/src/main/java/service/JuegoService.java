@@ -52,7 +52,7 @@ public class JuegoService implements IJuegoService {
 
     @Override
     public boolean addUser(String usuario, String pwd, boolean admin) {
-        return usuarioDAO.guardar(new Usuario(3, admin, usuario, pwd));
+        return usuarioDAO.guardar(new Usuario(admin, usuario, pwd));
     }
 
     @Override
