@@ -1,9 +1,9 @@
 package ui;
 
+import common.Constantes;
 import dao.PartidaDAO;
 import dao.UsuarioDAO;
 import domain.Usuario;
-import io.github.palexdev.materialfx.controls.MFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +19,9 @@ import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import java.util.stream.Collectors;
+
 
 @Setter
 public class MenuAdminController implements Initializable {
@@ -46,6 +49,8 @@ public class MenuAdminController implements Initializable {
     private TextField id;
     @FXML
     private ComboBox<String> selectOrder;
+    @FXML
+    public CheckBox adminPrimero;
 
     public MenuAdminController() {
         viewModel = new MainViewModel(new JuegoService(new UsuarioDAO(), new PartidaDAO()));
@@ -61,6 +66,7 @@ public class MenuAdminController implements Initializable {
         columna4.setCellValueFactory(new PropertyValueFactory<>("isAdmin"));
         comboBox.getItems().addAll("true", "false");
         selectOrder.getItems().addAll("Id", "Nombre");
+        selectOrder.setValue("Id");
 
         tablaUsuarios.setOnMouseClicked((MouseEvent event) -> onEdit());
     }
@@ -77,15 +83,17 @@ public class MenuAdminController implements Initializable {
 
     @FXML
     private void addUsuario() {
-        if (id.getText().isEmpty() || nombre.getText().isEmpty() || contrasenya.getText().isEmpty() || comboBox.getValue().isBlank()) {
-            alertaError("añadir usuario");
+        if (id.getText().isEmpty() || nombre.getText().isEmpty() || contrasenya.getText().isEmpty() ||
+                comboBox.getValue().isBlank()) {
+            alertaError(Constantes.ANYADIR_USUARIO);
         }else {
-            Usuario usuario = new Usuario(Integer.parseInt(id.getText()), Boolean.parseBoolean(comboBox.getValue()), nombre.getText(), contrasenya.getText());
+            Usuario usuario = new Usuario(Integer.parseInt(id.getText()), Boolean.parseBoolean(comboBox.getValue()),
+                    nombre.getText(), contrasenya.getText());
             if (viewModel.getServicio().addUsuario(usuario)) {
                 tablaUsuarios.getItems().add(usuario);
                     limpiarCampos();
             } else {
-                alertaError("añadir usuario");
+                alertaError(Constantes.ANYADIR_USUARIO);
             }
         }
     }
@@ -101,9 +109,9 @@ public class MenuAdminController implements Initializable {
     @FXML
     private void alertaError(String error) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText("Error al " + error);
-        alert.setContentText("Revise los campos");
+        alert.setTitle(Constantes.ERROR);
+        alert.setHeaderText(Constantes.ERROR_AL + error);
+        alert.setContentText(Constantes.REVISAR_CAMPOS);
         alert.show();
     }
 
@@ -119,9 +127,10 @@ public class MenuAdminController implements Initializable {
     @FXML
     private void updateUsuario() {
         if (nombre.getText() == null || contrasenya.getText() == null || id.getText() == null || comboBox.getValue() == null) {
-            alertaError("actualizar usuario");
+            alertaError(Constantes.ACTUALIZAR_USUARIO);
         } else {
-            Usuario user1 = new Usuario(Integer.parseInt(id.getText()), Boolean.parseBoolean(comboBox.getValue()), nombre.getText(), contrasenya.getText());
+            Usuario user1 = new Usuario(Integer.parseInt(id.getText()), Boolean.parseBoolean(comboBox.getValue()),
+                    nombre.getText(), contrasenya.getText());
             Usuario user2 = tablaUsuarios.getSelectionModel().getSelectedItem();
             if (viewModel.getServicio().updateUsuario(user1, user2)) {
                 tablaUsuarios.getItems().remove(user2);
@@ -129,7 +138,7 @@ public class MenuAdminController implements Initializable {
                 limpiarCampos();
                 tablaUsuarios.refresh();
             } else {
-                alertaError("actualizar usuario");
+                alertaError(Constantes.ACTUALIZAR_USUARIO);
             }
         }
     }
@@ -137,6 +146,13 @@ public class MenuAdminController implements Initializable {
     @FXML
     public void orderBy() {
         String orden = selectOrder.getValue();
-        tablaUsuarios.setItems(FXCollections.observableArrayList(viewModel.getServicio().orderBy(orden)));
+        tablaUsuarios.setItems(viewModel.getServicio().getUsuarios().stream()
+                .sorted((u1, u2) ->
+                        orden.equals("Id") ?
+                                Integer.compare(u1.getId(), u2.getId()) :
+                                u1.getNombreUsuario().compareTo(u2.getNombreUsuario())
+                ).sorted((u1, u2) -> adminPrimero.isSelected() ? Boolean.compare(u2.isAdmin(), u1.isAdmin()) : 0)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), FXCollections::observableArrayList))
+        );
     }
 }

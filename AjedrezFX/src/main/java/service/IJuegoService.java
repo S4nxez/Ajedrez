@@ -34,4 +34,5 @@ public interface IJuegoService {
     boolean updateUsuario(Usuario user1, Usuario user2);
 
     Set<Usuario> orderBy(String orden);
+
 }

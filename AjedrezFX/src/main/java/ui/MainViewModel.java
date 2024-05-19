@@ -14,7 +14,6 @@ public class MainViewModel {
     private final ObservableList<Usuario> usuarios;
     private final ObservableList<Partida> partidas;
 
-
     public MainViewModel(JuegoService servicio) {
         this.servicio = servicio;
         usuarios = FXCollections.observableArrayList(servicio.getUsuarios());

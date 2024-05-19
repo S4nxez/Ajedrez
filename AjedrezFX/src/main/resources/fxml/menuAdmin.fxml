@@ -27,7 +27,7 @@
          </font>
         </Button>
       <ComboBox fx:id="selectOrder" layoutX="14.0" layoutY="115.0" onAction="#orderBy" prefWidth="150.0" promptText="Ordenar por" />
-      <CheckBox layoutX="283.0" layoutY="118.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="200.0" text="Administradores primero" textFill="WHITE" />
+      <CheckBox fx:id="adminPrimero" layoutX="283.0" layoutY="118.0" onAction="#orderBy" mnemonicParsing="false" prefHeight="18.0" prefWidth="200.0" text="Administradores primero" textFill="WHITE" />
     </children>
 
 </AnchorPane>
