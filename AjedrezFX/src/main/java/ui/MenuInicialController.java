@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -33,10 +32,6 @@ public class MenuInicialController implements Initializable{
     public TableColumn columnaFecha;
     @FXML
     public TableColumn columnaId;
-    @FXML
-    private Button jugarButton;
-    @FXML
-    private Button datosButton;
 
     @Setter
     private Stage stage;

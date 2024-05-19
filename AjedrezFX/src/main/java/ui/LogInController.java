@@ -91,13 +91,27 @@ public class LogInController implements Initializable {
     }
 
     @FXML
-    public void signUpcrearClicked(MouseEvent mouseEvent){
-        if (signUpPwdField.getText().equals(pwdFieldRepeat.getText())){
-            if (service.addUser(signUpUsernameField.getText(), signUpPwdField.getText(), false)){
-                signUpLogIn();
-            }else {
-                signUpLabelError.setText(Constantes.USUARIO_YA_EXISTE);
+    public void signUpcrearClicked(){
+        String username = signUpUsernameField.getText();
+        String password = signUpPwdField.getText();
+        String repeatPassword = pwdFieldRepeat.getText();
+        // Expresión regular para validar contraseña: al menos 8 caracteres, al menos una letra mayúscula, al menos una
+        //letra minúscula, al menos un dígito y al menos un carácter especial
+        String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*@#$%^&+=!])(?=\\S+$).{8,}$";
+        // Expresión regular para validar nombre de usuario: entre 4 y 12 caracteres
+        String usernameRegex = "^.{4,12}$";
+
+        if (password.equals(repeatPassword)){
+            if (username.matches(usernameRegex) && password.matches(passwordRegex)) {
+                if (service.addUser(username, password, false)) {
+                    signUpLogIn();
+                } else {
+                    signUpLabelError.setText(Constantes.USUARIO_YA_EXISTE);
+                }
+            } else {
+                signUpLabelError.setText(Constantes.USUARIO_CONTRASENYA_NO_VALIDOS);
             }
+
         } else {
             labelErrorRepetir.setText(Constantes.CONTRASENYAS_NO_COINCIDEN);
         }
@@ -105,7 +119,7 @@ public class LogInController implements Initializable {
     }
 
     public void signUpLogIn() {
-        usernameField.clear();
+        usernameField.clear(); //Limpio todos los campos y los labels de error
         pwdField.clear();
         signUpUsernameField.clear();
         signUpPwdField.clear();
@@ -113,6 +127,7 @@ public class LogInController implements Initializable {
         signUpLabelError.setVisible(false);
         labelErrorRepetir.setVisible(false);
         labelError.setVisible(false);
+
         crearCuentaPane.setVisible(false);
         logInPane.setVisible(true);
     }

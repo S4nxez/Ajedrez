@@ -6,6 +6,12 @@
     "contrasenya": "admin"
   },
   {
+    "id": 3,
+    "isAdmin": true,
+    "nombreUsuario": "admin2",
+    "contrasenya": "2"
+  },
+  {
     "id": 2,
     "isAdmin": false,
     "nombreUsuario": "user",

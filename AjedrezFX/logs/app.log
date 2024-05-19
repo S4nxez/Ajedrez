@@ -1,1 +1,10 @@
 14:41:49.693 [JavaFX Application Thread] INFO  ui.LogInController - Usuario o contraseña incorrecto
+16:17:19.206 [JavaFX Application Thread] INFO  ui.LogInController - Usuario o contraseña incorrecto
+17:22:13.006 [JavaFX Application Thread] INFO  ui.LogInController - Usuario o contraseña incorrecto
+17:22:13.220 [JavaFX Application Thread] INFO  ui.LogInController - Usuario o contraseña incorrecto
+18:16:33.055 [JavaFX Application Thread] INFO  ui.LogInController - Usuario o contraseña incorrecto
+19:49:20.143 [JavaFX Application Thread] INFO  dao.PartidaDAO - Partida guardada correctamente: 7
+19:50:58.851 [JavaFX Application Thread] INFO  dao.PartidaDAO - Partida guardada correctamente: 8
+19:51:40.946 [JavaFX Application Thread] INFO  dao.PartidaDAO - Partida guardada correctamente: 9
+19:52:27.469 [JavaFX Application Thread] INFO  ui.LogInController - Usuario o contraseña incorrecto
+19:52:35.126 [JavaFX Application Thread] INFO  dao.PartidaDAO - Partida guardada correctamente: 10

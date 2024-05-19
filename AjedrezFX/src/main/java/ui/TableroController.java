@@ -1,5 +1,6 @@
 package ui;
 
+import common.Constantes;
 import dao.PartidaDAO;
 import dao.UsuarioDAO;
 import javafx.event.ActionEvent;
@@ -48,17 +49,17 @@ public class TableroController implements Initializable {
                 movimiento[1] = coordenadas;
                 Movimiento mov = juego.jugada(movimiento[0] + movimiento[1], tablero);
                 if (mov == null){
-                    label.setText("Entrada no valida");
+                    label.setText(Constantes.ENTRADA_INCORRECTA);
                     flag = false;
                 }
                 else if (!juego.ejecutarJugada(mov, tablero)) {
-                    label.setText("Movimiento ilegal");
+                    label.setText(Constantes.ENTRADA_INCORRECTA);
                     flag = false;
                 }
                 else if (juego.jaque(tablero, juego.ubicarRey(tablero, !juego.getTurno()))) {
-                    label.setText("Jaque");
+                    label.setText(Constantes.JAQUE);
                     if (juego.jaqueMate(tablero,juego.ubicarRey(tablero, !juego.getTurno())))
-                        label.setText("Jaque Mate");
+                        label.setText(Constantes.JAQUE_MATE);
                     juego.setTurno(!juego.getTurno());
                 } else
                     juego.setTurno(!juego.getTurno());

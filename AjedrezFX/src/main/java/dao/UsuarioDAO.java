@@ -4,17 +4,21 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import domain.Usuario;
 import lombok.Getter;
-import lombok.Setter;
+import config.Config;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import common.Constantes;
+
+@Log4j2
 public class UsuarioDAO implements IUsuarioDAO<Usuario> {
 
     @Getter
     private Set<Usuario> usuarios;
-    public static final String FICHERO = "Usuarios.json";
+    public static final String FICHERO = new Config().loadPathUsuariosProperties();
     @Getter
     private static int autonumerico;
 
@@ -74,7 +78,9 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
         boolean ret = usuarios.add(usuario);
         if (ret) {
             setAutonumerico(usuarios.size());
-            update(new Usuario(autonumerico, usuario.isAdmin() ,usuario.getNombreUsuario(), usuario.getContrasenya()), usuario);
+            Usuario nuevo = new Usuario(autonumerico, usuario.isAdmin(), usuario.getNombreUsuario(), usuario.getContrasenya());
+            update(nuevo, usuario);
+            log.info(Constantes.USUARIO_ANYADIDO + "{}", usuario.getId());
             guardarUsuarios();
         }
         return ret;
@@ -115,6 +121,7 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
     @Override
     public boolean delete(Usuario usuario) {
         boolean ret = usuarios.remove(usuario);
+        log.info(Constantes.USUARIO_ELIMINADO + "{}", usuario.getId());
         guardarUsuarios();
         return ret;
     }
@@ -130,6 +137,7 @@ public class UsuarioDAO implements IUsuarioDAO<Usuario> {
         }
         if (ret && usuarios.add(user2)) {
             guardarUsuarios();
+            log.info(Constantes.USUARIO_ACTUALIZADO + "{}", user1.getId());
         }else {
             ret = false;
             usuarios.add(user1);

@@ -60,7 +60,6 @@ public class Partida implements Serializable {
                 if (aux != null)
                     tablero.ponPieza(aux, psFin);
                 tablero.ponPieza(figura, psIni);
-                System.out.println("Te estas poniendo en jaque");
                 return false;
             }
             return true;
