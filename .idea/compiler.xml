@@ -8,8 +8,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Ajedrez" />
-        <module name="Ajedrez (1)" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Ajedrez (1)" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>

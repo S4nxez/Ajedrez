@@ -1,8 +1,10 @@
-package Juego;
+package domain;
 
-import piezas.*;
+import domain.piezas.*;
 
-public class Tablero {
+import java.io.Serializable;
+
+public class Tablero implements Serializable {
     private Pieza[][] tablero;
     public Tablero() {
         this.tablero = new Pieza[8][8];
@@ -20,27 +22,6 @@ public class Tablero {
         tablero[0][4] = new Rey(false, "♚");
         tablero[7][3] = new Reina(true, "♕");
         tablero[0][3] = new Reina(false, "♛");
-    }
-
-    public void pintarTablero() {
-        boolean esBlanco = true;
-        int     i = 8;
-        for (int fila = 0; fila <= 7; fila++) {
-            System.out.print(i + " |");
-            for (int columna = 0; columna <= 7; columna++) {
-                if (tablero[fila][columna] != null)
-                    System.out.print(tablero[fila][columna] + " ");
-                else if (esBlanco)
-                    System.out.print(" □ ");
-                else
-                    System.out.print(" ■ ");
-                esBlanco = !esBlanco;
-            }
-            esBlanco = !esBlanco;
-            System.out.println();
-            i--;
-        }
-        System.out.println("- |A  B  C  D  E  F  G  H");
     }
 
     public boolean hayPieza(int fila, int columna){
@@ -76,22 +57,29 @@ public class Tablero {
         }
         return false;
     }
+
     public void ponPieza(Pieza figura, int fila, int columna){
         tablero[fila][columna] = figura;
     }
+
     public void ponPieza(Pieza figura, Posicion pos){
         tablero[pos.getFila()][pos.getColumna()] = figura;
     }
+
     public void quitaPieza(int fila, int columna){
         tablero[fila][columna] = null;
     }
+
     public void quitaPieza(Posicion pos){
         tablero[pos.getFila()][pos.getColumna()] = null;
     }
+
     public Pieza getPieza(int fila, int columna){
         return tablero[fila][columna];
     }
+
     public Pieza getPieza(Posicion pos){
         return tablero[pos.getFila()][pos.getColumna()];
     }
+
 }

@@ -53,3 +53,4 @@
 17:34:11.873 [JavaFX Application Thread] INFO  dao.PartidaDAO - Partida guardada correctamente: 0
 17:34:13.673 [JavaFX Application Thread] INFO  dao.PartidaDAO - Escribiendo fichero: binarioPartidas
 17:34:13.674 [JavaFX Application Thread] INFO  dao.PartidaDAO - Partida guardada correctamente: 0
+09:49:53.207 [JavaFX Application Thread] INFO  dao.PartidaDAO - Creando fichero binario: binarioPartidas
