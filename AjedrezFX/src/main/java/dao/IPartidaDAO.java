@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface IPartidaDAO<T> {
-    void crearFicheros() throws IOException;
+    boolean crearFicheros() throws IOException;
 
     Set<Partida> leerFicheroBinario();
 
@@ -18,4 +18,6 @@ public interface IPartidaDAO<T> {
     void eliminar(Partida partida);
 
     Set<Partida> obtenerTodos();
+
+    Partida getPartidaById(int partidaId);
 }

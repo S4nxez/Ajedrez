@@ -19,4 +19,5 @@ public class Constantes {
     public static final String ENTRADA_INCORRECTA = "Entrada no valida";
     public static final String JAQUE = "Jaque";
     public static final String JAQUE_MATE = "Jaque mate";
+    public static final String CREANDO_BINARIO = "Creando fichero binario: ";
 }

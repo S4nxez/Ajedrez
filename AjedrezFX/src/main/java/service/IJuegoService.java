@@ -2,9 +2,7 @@ package service;
 
 import domain.Partida;
 import domain.Usuario;
-import javafx.collections.ObservableList;
 
-import java.util.List;
 import java.util.Set;
 
 public interface IJuegoService {
@@ -35,4 +33,5 @@ public interface IJuegoService {
 
     Set<Usuario> orderBy(String orden);
 
+    Partida getPartidaById(int partidaId);
 }
