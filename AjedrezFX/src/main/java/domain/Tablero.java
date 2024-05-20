@@ -2,7 +2,9 @@ package domain;
 
 import domain.piezas.*;
 
-public class Tablero {
+import java.io.Serializable;
+
+public class Tablero implements Serializable {
     private Pieza[][] tablero;
     public Tablero() {
         this.tablero = new Pieza[8][8];
@@ -76,21 +78,27 @@ public class Tablero {
         }
         return false;
     }
+
     public void ponPieza(Pieza figura, int fila, int columna){
         tablero[fila][columna] = figura;
     }
+
     public void ponPieza(Pieza figura, Posicion pos){
         tablero[pos.getFila()][pos.getColumna()] = figura;
     }
+
     public void quitaPieza(int fila, int columna){
         tablero[fila][columna] = null;
     }
+
     public void quitaPieza(Posicion pos){
         tablero[pos.getFila()][pos.getColumna()] = null;
     }
+
     public Pieza getPieza(int fila, int columna){
         return tablero[fila][columna];
     }
+
     public Pieza getPieza(Posicion pos){
         return tablero[pos.getFila()][pos.getColumna()];
     }

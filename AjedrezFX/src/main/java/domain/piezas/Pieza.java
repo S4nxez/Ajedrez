@@ -3,7 +3,9 @@ package domain.piezas;
 import domain.Movimiento;
 import domain.Tablero;
 
-public abstract class Pieza {
+import java.io.Serializable;
+
+public abstract class Pieza implements Serializable {
     private final boolean color;
     private final String nombre;
 

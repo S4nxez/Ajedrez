@@ -5,19 +5,24 @@ import domain.piezas.Pieza;
 import domain.piezas.Rey;
 import domain.piezas.Torre;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Getter
+@Setter
 public class Partida implements Serializable {
     private boolean elTurno = true; // 0->Negras 1->Blancas
     private LocalDate fecha;
     private int id;
+    private Tablero tablero;
 
     public Partida() {
         this.fecha = LocalDate.now();
         this.id = PartidaDAO.getAutonumerico();
+        this.tablero = new Tablero();
     }
 
     public boolean getTurno() {
@@ -62,6 +67,7 @@ public class Partida implements Serializable {
                 tablero.ponPieza(figura, psIni);
                 return false;
             }
+            this.tablero = tablero;
             return true;
         } else
             return false;
@@ -83,7 +89,7 @@ public class Partida implements Serializable {
         if ( torre.getColor() != rey.getColor() || torre.getClass() != Torre.class || ((Torre) torre).isMovido())
             return false;
 
-        int i = columna + sum; // hay un error tomo como referencia la posicion final del rey y cuando hago el enroque largo si hay una pieza en b1 lo hace igual
+        int i = columna + sum; // hay un error tomo como referencia la posición final del rey y cuando hago el enroque largo si hay una pieza en b1 lo hace igual
         if (sum == -1 && tab.hayPieza(fila, 1))
             return false;
         while ( i != mov.getPosFinal().getColumna()){
@@ -147,8 +153,8 @@ public class Partida implements Serializable {
 
     public boolean jaqueMate(Tablero tablero, Posicion posRey) {
         /*
-        //este metodo pasa a jaque las coordenadas del rey si estuviese en las posiciones que le rodean,
-        //pero el metodo jaque usa directamente la posición del rey para ver su color y esto provoca un null pointer
+        //este método pasa a jaque las coordenadas del rey si estuviese en las posiciones que le rodean,
+        //pero el método jaque usa directamente la posición del rey para ver su color y esto provoca un null pointer
         int nuevaFila, nuevaColumna;
 
         if (!jaque(tablero, posRey))
@@ -167,7 +173,16 @@ public class Partida implements Serializable {
         return false;
     }
 
-    private boolean posValida(int fila, int columna){
-        return (fila >= 0 && columna >= 0 && fila < 8 && columna < 8);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Partida partida = (Partida) o;
+        return id == partida.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

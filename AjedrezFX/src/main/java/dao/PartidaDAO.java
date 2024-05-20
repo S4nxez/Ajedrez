@@ -19,8 +19,6 @@ public class PartidaDAO implements IPartidaDAO<Partida> {
     @Setter
     private static int autonumerico;
 
-
-
     public PartidaDAO() {
         // Inicializar la lista de partidas
         this.partidas = leerFicheroBinario();
@@ -28,10 +26,11 @@ public class PartidaDAO implements IPartidaDAO<Partida> {
     }
 
     @Override
-    public void crearFicheros() throws IOException {
+    public boolean crearFicheros() throws IOException {
         File fichero = new File(FICHEROB);
         if (!fichero.exists())
-            fichero.createNewFile();
+            return (fichero.createNewFile());
+        return false;
     }
 
     @Override
@@ -48,6 +47,13 @@ public class PartidaDAO implements IPartidaDAO<Partida> {
                     ret = new HashSet<>();
 
             } catch (IOException | ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(PartidaDAO.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
+            }
+        } else {
+            try {
+                if (crearFicheros())
+                    log.info(Constantes.CREANDO_BINARIO + "{}", FICHEROB);
+            } catch (IOException ex) {
                 java.util.logging.Logger.getLogger(PartidaDAO.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
             }
         }
@@ -70,6 +76,7 @@ public class PartidaDAO implements IPartidaDAO<Partida> {
     @Override
     public void guardar(Partida partida) {
         // Agregar la partida a la lista
+        partidas.remove(partida);
         if (partidas.add(partida) && escribirFicheroBinario())
             log.info(Constantes.PARTIDA_GUARDADA + "{}", partida.getId());
     }
@@ -81,19 +88,13 @@ public class PartidaDAO implements IPartidaDAO<Partida> {
         log.info(Constantes.PARTIDA_ELIMINADA + "{}", partida.getId());
     }
 
-   /* @Override
-    public Juego buscarPorId(int id) {
-        // Implementar lógica para buscar una partida por su ID en la base de datos (si es necesario)
-        for (Juego partida : partidas) {
-            if (partida.getId() == id) {
-                return partida;
-            }
-        }
-        return null; // Si no se encuentra la partida con el ID especificado
-    }*/
-
     @Override
     public Set<Partida> obtenerTodos() {
         return partidas;
+    }
+
+    @Override
+    public Partida getPartidaById(int partidaId) {
+        return partidas.stream().filter(partida -> partida.getId() == partidaId).findFirst().orElse(null);
     }
 }

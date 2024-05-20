@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 @Setter
 public class MenuAdminController implements Initializable {
 
-
     private final MainViewModel viewModel;
     @FXML
     private TableView<Usuario> tablaUsuarios;

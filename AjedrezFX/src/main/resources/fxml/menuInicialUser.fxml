@@ -8,13 +8,14 @@
         <Button fx:id="jugarButton" layoutX="263.0" layoutY="157.0" onMouseClicked="#jugarClicked" prefWidth="100" styleClass="green-button" text="Jugar" />
         <Button fx:id="datosButton" layoutX="263.0" layoutY="214.0" onMouseClicked="#menuDatosClicked" prefWidth="100" styleClass="green-button" text="Menú" />
     </AnchorPane>
-    <AnchorPane fx:id="partidasPane" layoutX="26.0" layoutY="-33.0" prefHeight="400.0" prefWidth="524.0" visible="false">
+    <AnchorPane fx:id="partidasPane" layoutX="26.0" layoutY="-33.0" prefHeight="400.0" prefWidth="600.0" visible="false">
         <TableView fx:id="tablaPartidas" layoutX="24.0" layoutY="177.0" prefHeight="307.0" prefWidth="500.0">
             <columns>
                 <TableColumn fx:id="columnaId" prefWidth="150" text="Id" />
                 <TableColumn fx:id="columnaFecha" prefWidth="350" text="Fecha" />
             </columns>
         </TableView>
-       <Button layoutX="439.0" layoutY="360.0" mnemonicParsing="false" text="Recuperar partida" />
+        <Label layoutX="352.0" layoutY="119.0" onMouseClicked="#volverClicked" text="Volver" textFill="BLUE" underline="true" />
+       <Button layoutX="439.0" layoutY="119.0" mnemonicParsing="false" text="Recuperar partida" onAction="#recuperar"/>
     </AnchorPane>
 </AnchorPane>

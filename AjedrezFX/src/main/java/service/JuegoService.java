@@ -6,7 +6,6 @@ import dao.PartidaDAO;
 import dao.UsuarioDAO;
 import domain.Partida;
 import domain.Usuario;
-import javafx.collections.ObservableList;
 
 import java.util.List;
 import java.util.Set;
@@ -83,6 +82,11 @@ public class JuegoService implements IJuegoService {
     @Override
     public Set<Usuario> orderBy(String orden) {
         return usuarioDAO.orderBy(orden);
+    }
+
+    @Override
+    public Partida getPartidaById(int partidaId) {
+        return partidaDAO.getPartidaById(partidaId);
     }
 
 }
