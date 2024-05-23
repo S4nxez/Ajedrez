@@ -70,3 +70,15 @@
     -fx-font-size: 14px; /* Tamaño de la fuente de los elementos de la lista */
 }
 
+/* Estilo para la label normal */
+.volver {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px; /* Ajusta el tamaño de la fuente según tus necesidades */
+}
+
+/* Estilo para cuando la label es presionada */
+.volver:pressed {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0.5, 0.0, 0.0);
+}
+
