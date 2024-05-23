@@ -35,8 +35,8 @@ La carpeta **resources** está organizada en:
 ### Pantalla de Inicio de Sesión
 
 - **Login**: Los usuarios pueden iniciar sesión ingresando su nombre de usuario y contraseña.
-  - Se verifica que ambos campos cumplan con una expresión regular (regex).
 - **Registro**: Si el usuario no tiene una cuenta, puede ir a una pantalla para crear una nueva.
+  - Se verifica que los campos usario y contraseña cumplan con una expresión regular (regex).
 
 ### Pantallas de Usuario
 
@@ -81,6 +81,6 @@ Dependiendo del tipo de usuario (administrador o no administrador), la aplicaci�
 4. Push a la rama (git push origin feature/nueva-funcionalidad).
 5. Abre una Pull Request.
 
-#Licencia
+## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT. Para más información, consulta el archivo LICENSE.
