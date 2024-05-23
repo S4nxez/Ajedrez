@@ -15,7 +15,7 @@
                 <TableColumn fx:id="columnaFecha" prefWidth="350" text="Fecha" />
             </columns>
         </TableView>
-        <Label layoutX="352.0" layoutY="119.0" onMouseClicked="#volverClicked" text="Volver" textFill="BLUE" underline="true" />
+        <Label layoutX="26.0" layoutY="119.0" onMouseClicked="#volverClicked" text="Volver" styleClass="volver" />
        <Button layoutX="439.0" layoutY="119.0" mnemonicParsing="false" text="Recuperar partida" onAction="#recuperar"/>
     </AnchorPane>
 </AnchorPane>
