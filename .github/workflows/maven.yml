@@ -29,9 +29,14 @@ jobs:
         cache: maven
     - name: Build with Maven
       env:
-        MAVEN_OPTS: -Xmx2048m
+        MAVEN_OPTS: -Xmx4096m
       run: mvn -B package --file pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
       uses: advanced-security/maven-dependency-submission-action@v1
+          # Run your JavaFX application
+    - name: Run JavaFX application
+      run: mvn javafx:run
+      env:
+        MAVEN_OPTS: -Xmx4096m
